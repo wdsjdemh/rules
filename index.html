@@ -2,652 +2,1524 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>玩家守则 - Dream World Minecraft Server</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>玩家守则 - DreamWorld Minecraft服务器</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
-        /* 基础重置与变量定义 */
         :root {
-            --primary-color: #4CAF50;
-            --primary-dark: #388E3C;
-            --secondary-color: #2196F3;
-            --accent-color: #FF9800;
-            --dark-color: #2C3E50;
-            --light-color: #ECF0F1;
-            --danger-color: #E74C3C;
-            --warning-color: #F39C12;
-            --success-color: #27AE60;
-            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            --border-radius: 8px;
-            --transition: all 0.3s ease;
+            --primary: #10B981;
+            --primary-light: #D1FAE5;
+            --primary-dark: #059669;
+            --secondary: #8B5CF6;
+            --secondary-light: #EDE9FE;
+            --gray-50: #F9FAFB;
+            --gray-100: #F3F4F6;
+            --gray-200: #E5E7EB;
+            --gray-300: #D1D5DB;
+            --gray-400: #9CA3AF;
+            --gray-500: #6B7280;
+            --gray-600: #4B5563;
+            --gray-700: #374151;
+            --gray-800: #1F2937;
+            --gray-900: #111827;
+            --white: #FFFFFF;
+            --warning: #F59E0B;
+            --warning-light: #FEF3C7;
+            --danger: #EF4444;
+            --danger-light: #FEE2E2;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --radius: 12px;
+            --radius-sm: 8px;
+            --radius-xs: 6px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', sans-serif;
             line-height: 1.6;
-            color: #333;
-            background-color: #f8f9fa;
-            background-image: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMCAwaDQwdjQwSDB6IiBmaWxsPSIjZmZmIi8+PHBhdGggZD0iTTAgMGg0MHY0MEgweiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZWVlIiBzdHJva2Utd2lkdGg9IjEiLz48L3N2Zz4=');
-            overflow-x: hidden;
-            opacity: 0;
-            transition: opacity 0.8s ease;
+            color: var(--gray-800);
+            background-color: var(--gray-50);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
-        
-        body.loaded {
-            opacity: 1;
+
+        /* 优化触摸体验 */
+        a, button, .rule-item, .nav-card {
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+            tap-highlight-color: rgba(0, 0, 0, 0.1);
         }
-        
-        /* 导航栏样式 */
+
+        /* 头部样式 - 移动端优化 */
         header {
-            background-color: var(--dark-color);
-            box-shadow: var(--shadow);
+            background-color: var(--white);
+            box-shadow: var(--shadow-sm);
             position: sticky;
             top: 0;
-            z-index: 1000;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.98);
+            height: 60px;
+            border-bottom: 1px solid var(--gray-200);
         }
-        
+
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        /* 移动端优化容器内边距 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 12px;
+            }
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100%;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--gray-900);
+            min-width: 0; /* 防止logo溢出 */
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: var(--radius-xs);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        .logo-text {
+            min-width: 0;
+            overflow: hidden;
+        }
+
+        .logo-text h1 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            line-height: 1.2;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .logo-text p {
+            font-size: 0.7rem;
+            color: var(--gray-500);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* 桌面端导航 */
         nav ul {
             display: flex;
-            justify-content: center;
             list-style: none;
-            padding: 1rem 0;
-            flex-wrap: wrap;
+            gap: 4px;
         }
-        
-        nav ul li {
-            margin: 0 1rem;
-        }
-        
-        nav ul li a {
-            color: white;
+
+        nav a {
+            color: var(--gray-700);
             text-decoration: none;
-            font-weight: 600;
-            padding: 0.5rem 1rem;
-            border-radius: var(--border-radius);
+            padding: 8px 12px;
+            border-radius: var(--radius-xs);
             transition: var(--transition);
+            font-weight: 500;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 6px;
+            font-size: 0.9rem;
+            white-space: nowrap;
         }
-        
-        nav ul li a:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-            transform: translateY(-2px);
+
+        nav a:hover {
+            background-color: var(--gray-100);
+            color: var(--primary);
         }
-        
-        nav ul li a i {
-            font-size: 1.2rem;
+
+        nav a.active {
+            background-color: var(--primary-light);
+            color: var(--primary);
         }
-        
-        /* 主内容区域 */
+
+        /* 移动端菜单按钮 */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--gray-700);
+            font-size: 1.4rem;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: var(--radius-xs);
+            width: 44px;
+            height: 44px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mobile-menu-toggle:hover, .mobile-menu-toggle:active {
+            background-color: var(--gray-100);
+        }
+
+        /* 主要内容样式 - 移动端优化 */
         main {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
+            flex: 1;
+            padding: 40px 0;
+            width: 100%;
         }
-        
-        .main-title {
+
+        @media (max-width: 768px) {
+            main {
+                padding: 32px 0;
+            }
+        }
+
+        /* 页面标题 */
+        .page-header {
             text-align: center;
-            color: var(--dark-color);
-            margin-bottom: 1.5rem;
-            font-size: 2.8rem;
+            margin-bottom: 40px;
             position: relative;
-            padding-bottom: 1rem;
+            padding: 0 8px;
         }
-        
-        .main-title::after {
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        .page-header p {
+            font-size: 1.1rem;
+            color: var(--gray-600);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .page-header::after {
             content: '';
             position: absolute;
-            bottom: 0;
+            bottom: -16px;
             left: 50%;
             transform: translateX(-50%);
-            width: 150px;
+            width: 60px;
             height: 4px;
-            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
             border-radius: 2px;
         }
-        
-        .subtitle {
-            text-align: center;
-            font-size: 1.2rem;
-            margin-bottom: 3rem;
-            color: #555;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-            line-height: 1.8;
-        }
-        
-        /* 核心精神部分 */
-        .core-spirit {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            padding: 2rem;
-            border-radius: var(--border-radius);
-            margin-bottom: 3rem;
+
+        /* 规则分类导航 - 移动端优化 */
+        .rules-nav {
+            position: sticky;
+            top: 68px;
+            background-color: var(--white);
+            border-radius: var(--radius);
+            padding: 12px;
+            margin-bottom: 24px;
             box-shadow: var(--shadow);
-            transform: translateY(20px);
-            opacity: 0;
-            animation: fadeInUp 0.8s forwards;
+            z-index: 50;
+            border: 1px solid var(--gray-200);
         }
-        
-        .core-spirit h2 {
-            margin-bottom: 1rem;
+
+        .rules-nav ul {
             display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        
-        .core-spirit h2 i {
-            font-size: 2rem;
-        }
-        
-        /* 章节样式 */
-        .chapter {
-            background-color: white;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            padding: 2rem;
-            margin-bottom: 2.5rem;
-            transform: translateY(20px);
-            opacity: 0;
-            transition: transform 0.5s ease, opacity 0.5s ease;
-        }
-        
-        .chapter.in-view {
-            transform: translateY(0);
-            opacity: 1;
-        }
-        
-        .chapter-title {
-            color: var(--dark-color);
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.75rem;
-            border-bottom: 2px solid var(--primary-color);
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        
-        .chapter-title i {
-            color: var(--primary-color);
-        }
-        
-        .rule-list {
+            flex-wrap: nowrap;
             list-style: none;
+            gap: 6px;
+            justify-content: flex-start;
+            overflow-x: auto;
+            overflow-y: hidden;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            padding-bottom: 4px;
         }
-        
-        .rule-item {
-            margin-bottom: 1.5rem;
-            padding-left: 2rem;
-            position: relative;
+
+        .rules-nav ul::-webkit-scrollbar {
+            display: none;
         }
-        
-        .rule-item::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0.75rem;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background-color: var(--primary-color);
+
+        .rules-nav li {
+            flex-shrink: 0;
         }
-        
-        .rule-item strong {
-            color: var(--primary-dark);
-            font-size: 1.1rem;
-        }
-        
-        .rule-item p {
-            margin-top: 0.5rem;
-        }
-        
-        /* 违规处理样式 */
-        .penalties {
-            background-color: #fff9e6;
-            border-left: 5px solid var(--warning-color);
-            padding: 1.5rem;
-            border-radius: var(--border-radius);
-            margin: 2rem 0;
-        }
-        
-        .penalty-item {
+
+        .rules-nav a {
+            color: var(--gray-700);
+            text-decoration: none;
+            padding: 10px 14px;
+            border-radius: var(--radius-xs);
+            transition: var(--transition);
+            font-weight: 500;
+            font-size: 0.85rem;
             display: flex;
             align-items: center;
-            margin-bottom: 1rem;
+            gap: 6px;
+            white-space: nowrap;
+            border: 1px solid transparent;
         }
-        
-        .penalty-number {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 30px;
-            height: 30px;
-            background-color: var(--warning-color);
-            color: white;
-            border-radius: 50%;
-            margin-right: 1rem;
-            font-weight: bold;
+
+        .rules-nav a:hover {
+            background-color: var(--gray-100);
+            color: var(--primary);
         }
-        
-        /* 礼仪部分样式 */
-        .etiquette-list {
+
+        .rules-nav a.active {
+            background-color: var(--primary-light);
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        /* 规则内容区域 */
+        .rules-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
+            grid-template-columns: 1fr;
+            gap: 24px;
         }
-        
-        .etiquette-item {
-            background-color: white;
-            border-radius: var(--border-radius);
-            padding: 1.5rem;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+
+        .rule-category {
+            background-color: var(--white);
+            border-radius: var(--radius);
+            padding: 28px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--gray-200);
             transition: var(--transition);
         }
-        
-        .etiquette-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+
+        .rule-category:hover {
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary-light);
         }
-        
-        .etiquette-item i {
-            font-size: 2rem;
-            color: var(--secondary-color);
-            margin-bottom: 1rem;
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 28px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid var(--gray-100);
         }
-        
-        /* 页脚样式 */
-        footer {
-            background-color: var(--dark-color);
-            color: white;
-            text-align: center;
-            padding: 2rem;
-            margin-top: 3rem;
+
+        .category-icon {
+            width: 52px;
+            height: 52px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.4rem;
+            flex-shrink: 0;
         }
-        
-        .server-info {
+
+        .category-title h2 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 4px;
+            line-height: 1.3;
+        }
+
+        .category-title p {
+            color: var(--gray-600);
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        /* 规则列表 */
+        .rules-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .rule-item {
+            padding: 18px;
+            border-radius: var(--radius-sm);
+            background-color: var(--gray-50);
+            border-left: 4px solid var(--primary);
+            transition: var(--transition);
+        }
+
+        .rule-item:hover {
+            background-color: var(--gray-100);
+        }
+
+        .rule-item.warning {
+            border-left-color: var(--warning);
+            background-color: var(--warning-light);
+        }
+
+        .rule-item.danger {
+            border-left-color: var(--danger);
+            background-color: var(--danger-light);
+        }
+
+        .rule-item-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            gap: 12px;
+        }
+
+        .rule-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--gray-900);
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            line-height: 1.4;
+            flex: 1;
+        }
+
+        .rule-title i {
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+
+        .rule-severity {
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 20px;
+            background-color: var(--primary);
+            color: var(--white);
+            white-space: nowrap;
+            flex-shrink: 0;
+            height: fit-content;
+        }
+
+        .rule-severity.warning {
+            background-color: var(--warning);
+        }
+
+        .rule-severity.danger {
+            background-color: var(--danger);
+        }
+
+        .rule-description {
+            color: var(--gray-700);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        .rule-description ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        .rule-description li {
+            margin-bottom: 8px;
+            position: relative;
+            line-height: 1.5;
+        }
+
+        .rule-penalty {
+            margin-top: 14px;
+            padding: 12px;
+            background-color: var(--white);
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--gray-200);
             font-size: 0.9rem;
-            opacity: 0.8;
-            margin-top: 1rem;
         }
-        
-        /* 动画 */
-        @keyframes fadeInUp {
-            to {
+
+        .rule-penalty strong {
+            color: var(--danger);
+            font-weight: 600;
+        }
+
+        /* 重要提醒 */
+        .important-notice {
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--secondary-light) 100%);
+            border-radius: var(--radius);
+            padding: 28px;
+            margin-top: 40px;
+            border: 1px solid var(--primary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .important-notice::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none"/><path d="M0,0 L100,100" stroke="%2310B981" stroke-width="1" opacity="0.1"/><path d="M100,0 L0,100" stroke="%2310B981" stroke-width="1" opacity="0.1"/></svg>');
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        .important-notice-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .important-notice h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            line-height: 1.3;
+        }
+
+        .important-notice h3 i {
+            color: var(--warning);
+        }
+
+        .important-notice p {
+            color: var(--gray-800);
+            margin-bottom: 14px;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .important-notice ul {
+            margin-left: 20px;
+            margin-top: 12px;
+        }
+
+        .important-notice li {
+            margin-bottom: 8px;
+            color: var(--gray-800);
+            line-height: 1.5;
+        }
+
+        /* 页脚 - 移动端优化 */
+        footer {
+            background-color: var(--gray-900);
+            color: var(--gray-300);
+            padding: 48px 0 24px;
+            margin-top: 64px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 36px;
+            margin-bottom: 36px;
+        }
+
+        .footer-section h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 20px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: var(--gray-400);
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            padding: 4px 0;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-light);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 24px;
+            border-top: 1px solid var(--gray-800);
+            color: var(--gray-500);
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        /* 移动端优化样式 */
+        @media (max-width: 768px) {
+            /* 头部优化 */
+            header {
+                height: 56px;
+            }
+            
+            .mobile-menu-toggle {
+                display: flex;
+            }
+            
+            /* 移动端导航菜单 */
+            nav {
+                position: fixed;
+                top: 56px;
+                left: 0;
+                width: 100%;
+                background-color: var(--white);
+                box-shadow: var(--shadow-md);
+                padding: 16px;
+                transform: translateY(-100%);
+                opacity: 0;
+                transition: var(--transition);
+                z-index: 99;
+                max-height: calc(100vh - 56px);
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+                border-top: 1px solid var(--gray-200);
+            }
+            
+            nav.active {
                 transform: translateY(0);
                 opacity: 1;
             }
-        }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        
-        .pulse {
-            animation: pulse 2s infinite;
-        }
-        
-        /* 响应式设计 */
-        @media (max-width: 768px) {
+            
             nav ul {
                 flex-direction: column;
-                align-items: center;
-            }
-            
-            nav ul li {
-                margin: 0.5rem 0;
+                gap: 8px;
                 width: 100%;
+            }
+            
+            nav li {
+                width: 100%;
+            }
+            
+            nav a {
+                justify-content: flex-start;
+                padding: 14px 16px;
+                width: 100%;
+                border-radius: var(--radius-sm);
+                font-size: 1rem;
+            }
+            
+            /* 页面标题优化 */
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            
+            .page-header p {
+                font-size: 1rem;
+                padding: 0 4px;
+            }
+            
+            /* 规则导航优化 */
+            .rules-nav {
+                top: 64px;
+                padding: 10px;
+                margin-left: -12px;
+                margin-right: -12px;
+                border-radius: 0;
+                border-left: none;
+                border-right: none;
+                position: sticky;
+            }
+            
+            .rules-nav ul {
+                padding-bottom: 6px;
+            }
+            
+            .rules-nav a {
+                padding: 10px 12px;
+                font-size: 0.8rem;
+            }
+            
+            /* 规则分类优化 */
+            .rule-category {
+                padding: 20px;
+                border-radius: var(--radius-sm);
+            }
+            
+            .category-header {
+                flex-direction: column;
                 text-align: center;
+                gap: 12px;
+                margin-bottom: 24px;
             }
             
-            nav ul li a {
-                justify-content: center;
+            .category-icon {
+                width: 48px;
+                height: 48px;
+                font-size: 1.2rem;
             }
             
-            .main-title {
-                font-size: 2.2rem;
+            .category-title h2 {
+                font-size: 1.4rem;
             }
             
-            .chapter {
-                padding: 1.5rem;
+            .category-title p {
+                font-size: 0.9rem;
             }
             
-            .etiquette-list {
+            /* 规则项优化 */
+            .rule-item {
+                padding: 16px;
+            }
+            
+            .rule-item-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .rule-title {
+                font-size: 1.05rem;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 6px;
+            }
+            
+            .rule-severity {
+                align-self: flex-start;
+            }
+            
+            .rule-description {
+                font-size: 0.9rem;
+            }
+            
+            .rule-description ul {
+                margin-left: 16px;
+            }
+            
+            .rule-penalty {
+                font-size: 0.85rem;
+                padding: 10px;
+            }
+            
+            /* 重要提醒优化 */
+            .important-notice {
+                padding: 22px;
+                margin-top: 32px;
+            }
+            
+            .important-notice h3 {
+                font-size: 1.3rem;
+            }
+            
+            .important-notice p {
+                font-size: 0.9rem;
+            }
+            
+            /* 页脚优化 */
+            footer {
+                padding: 40px 0 20px;
+                margin-top: 48px;
+            }
+            
+            .footer-content {
                 grid-template-columns: 1fr;
+                gap: 32px;
             }
             
-            main {
-                padding: 1rem;
+            .footer-section h3 {
+                font-size: 1.1rem;
+                margin-bottom: 16px;
+            }
+            
+            .footer-links a {
+                font-size: 0.85rem;
+            }
+            
+            .copyright {
+                font-size: 0.8rem;
+                padding-top: 20px;
             }
         }
-        
-        /* 高亮重要内容 */
-        .highlight {
-            background-color: rgba(76, 175, 80, 0.1);
-            padding: 0.5rem 1rem;
-            border-radius: var(--border-radius);
-            border-left: 4px solid var(--primary-color);
-            margin: 1rem 0;
+
+        @media (max-width: 480px) {
+            /* 超小屏幕优化 */
+            .page-header h1 {
+                font-size: 1.75rem;
+            }
+            
+            .page-header p {
+                font-size: 0.95rem;
+            }
+            
+            .rules-nav a {
+                padding: 8px 10px;
+                font-size: 0.75rem;
+            }
+            
+            .rule-category {
+                padding: 18px;
+            }
+            
+            .category-title h2 {
+                font-size: 1.3rem;
+            }
+            
+            .rule-item {
+                padding: 14px;
+            }
+            
+            .rule-title {
+                font-size: 1rem;
+            }
+            
+            .important-notice {
+                padding: 20px;
+            }
+            
+            .container {
+                padding: 0 10px;
+            }
+            
+            .rules-nav {
+                margin-left: -10px;
+                margin-right: -10px;
+            }
         }
-        
-        /* 警示样式 */
-        .warning {
-            background-color: rgba(255, 152, 0, 0.1);
-            padding: 0.5rem 1rem;
-            border-radius: var(--border-radius);
-            border-left: 4px solid var(--warning-color);
-            margin: 1rem 0;
+
+        /* 防止文字过小 */
+        @media (max-width: 350px) {
+            html {
+                font-size: 15px;
+            }
+            
+            .logo-text h1 {
+                font-size: 1.1rem;
+            }
+            
+            .page-header h1 {
+                font-size: 1.6rem;
+            }
         }
-        
-        .danger {
-            background-color: rgba(231, 76, 60, 0.1);
-            padding: 0.5rem 1rem;
-            border-radius: var(--border-radius);
-            border-left: 4px solid var(--danger-color);
-            margin: 1rem 0;
+
+        /* 动画 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
-        
-        /* 滚动条样式 */
+
+        /* 滚动条样式优化 */
         ::-webkit-scrollbar {
-            width: 10px;
+            width: 8px;
+            height: 8px;
         }
-        
+
         ::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
-        
-        ::-webkit-scrollbar-thumb {
-            background: var(--primary-color);
-            border-radius: 5px;
-        }
-        
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--primary-dark);
-        }
-        
-        /* 装饰元素 */
-        .minecraft-icon {
-            display: inline-block;
-            width: 24px;
-            height: 24px;
-            background-color: var(--primary-color);
+            background: var(--gray-100);
             border-radius: 4px;
-            position: relative;
-            margin-right: 5px;
         }
-        
-        .minecraft-icon::before {
-            content: '';
-            position: absolute;
-            top: 4px;
-            left: 4px;
-            width: 16px;
-            height: 16px;
-            background-color: var(--primary-dark);
-            border-radius: 2px;
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--gray-300);
+            border-radius: 4px;
         }
-        
-        .version-badge {
-            display: inline-block;
-            background-color: var(--secondary-color);
-            color: white;
-            padding: 0.2rem 0.6rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            margin-left: 0.5rem;
-            vertical-align: middle;
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--gray-400);
         }
     </style>
 </head>
 <body>
+    <!-- 头部导航 -->
     <header>
-        <nav>
-            <ul>
-                <li><a href="https://www.dreamworld.eu.org"><i class="fas fa-home"></i> 主页</a></li>
-                <li><a href="https://rules.dreamworld.eu.org" class="active"><i class="fas fa-book"></i> 玩家守则</a></li>
-                <li><a href="https://help.dreamworld.eu.org"><i class="fas fa-tags"></i> 指令查询</a></li>
-                <li><a href="https://territories.dreamworld.eu.org"><i class="fas fa-map-marked-alt"></i> 公共领地</a></li>
-                <li><a href="https://opinfo.dreamworld.eu.org"><i class="fas fa-user-shield"></i> OP信息</a></li>
-            </ul>
-        </nav>
+        <div class="container header-container">
+            <a href="https://dreamworld.eu.org" class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-cube"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>DreamWorld</h1>
+                    <p>玩家守则</p>
+                </div>
+            </a>
+            
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="打开菜单">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="https://dreamworld.eu.org"><i class="fas fa-home"></i> 主页</a></li>
+                    <li><a href="https://rules.dreamworld.eu.org" class="active"><i class="fas fa-scroll"></i> 玩家守则</a></li>
+                    <li><a href="https://help.dreamworld.eu.org"><i class="fas fa-question-circle"></i> 帮助与指令</a></li>
+                    <li><a href="https://banlist.dreamworld.eu.org"><i class="fas fa-gavel"></i> 封神榜</a></li>
+                    <li><a href="https://public.dreamworld.eu.org"><i class="fas fa-city"></i> 公共设施</a></li>
+                    <li><a href="https://download.dreamworld.eu.org"><i class="fas fa-download"></i> 下载中心</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
-    
-    <main>
-        <h1 class="main-title">Dream World 生电服务器玩家守则 <span class="version-badge">1.21.1</span></h1>
+
+    <!-- 主内容区域 -->
+    <main class="container">
+        <!-- 页面标题 -->
+        <div class="page-header">
+            <h1>玩家守则</h1>
+            <p>为了维护 DreamWorld 生存服务器的良好游戏环境，请所有玩家仔细阅读并遵守以下规则。违规行为将受到相应处罚。</p>
+        </div>
         
-        <p class="subtitle">欢迎来到 Dream World Minecraft 生电服务器！本服务器致力于打造一个<strong>高效、公平、协作、低延迟</strong>的生电环境。所有规则的最终目的都是为了维护服务器整体性能与社区和谐，让每位玩家都能安心钻研技术、享受生电乐趣。</p>
-        
-        <section class="core-spirit">
-            <h2><i class="fas fa-heart"></i> 核心精神</h2>
-            <p>本服致力于打造一个<strong>高效、公平、协作、低延迟</strong>的生电环境。所有规则的最终目的都是为了<strong>维护服务器整体性能与社区和谐</strong>，让每位玩家都能安心钻研技术、享受生电乐趣。</p>
-        </section>
-        
-        <section class="chapter" id="chapter1">
-            <h2 class="chapter-title"><i class="fas fa-balance-scale"></i> 第一章：总则</h2>
-            <ul class="rule-list">
-                <li class="rule-item">
-                    <strong>尊重与文明</strong>
-                    <p>禁止任何形式的辱骂、人身攻击、歧视性言论、恶意挑衅及持续骚扰。玩家间应保持友善、专业的交流氛围。</p>
-                </li>
-                <li class="rule-item">
-                    <strong>禁止作弊与破坏公平</strong>
-                    <p>严格禁止使用任何非官方修改客户端、外挂、利用游戏漏洞（非特性）获取不当利益、复制物品、恶意使用管理员权限等行为。生电领域允许研究和使用<strong>游戏机制/特性</strong>，但请勿滥用明显破坏平衡的漏洞。</p>
-                </li>
-                <li class="rule-item">
-                    <strong>服主与管理员权威</strong>
-                    <p>管理员拥有对规则的解释权和执行权。对管理决定有异议，请私信文明沟通，勿在公屏争执。</p>
-                </li>
+        <!-- 规则分类导航 -->
+        <div class="rules-nav">
+            <ul>
+                <li><a href="#basic-rules" class="active"><i class="fas fa-user-check"></i> 基本准则</a></li>
+                <li><a href="#gameplay-rules"><i class="fas fa-gamepad"></i> 游戏规则</a></li>
+                <li><a href="#building-rules"><i class="fas fa-cube"></i> 建筑规则</a></li>
+                <li><a href="#community-rules"><i class="fas fa-users"></i> 社区规则</a></li>
+                <li><a href="#trade-rules"><i class="fas fa-coins"></i> 交易规则</a></li>
             </ul>
-        </section>
+        </div>
         
-        <section class="chapter" id="chapter2">
-            <h2 class="chapter-title"><i class="fas fa-tachometer-alt"></i> 第二章：性能与稳定（生电核心）</h2>
-            <div class="highlight">
-                <p><i class="fas fa-info-circle"></i> 本章规则是维护服务器性能的关键，请所有生电玩家务必遵守！</p>
-            </div>
-            <ul class="rule-list">
-                <li class="rule-item">
-                    <strong>实体管理</strong>
-                    <p>所有农场必须设计有<strong>可完全关闭</strong>的机制（例如，水流开关、实体堵塞、命名空间开关）。不允许建设"常开"且产生大量游离实体的农场。</p>
-                    <p>大量处死实体必须使用高效且对服务器负担小的方式（如瞬间伤害药水、窒息、岩浆）。避免使用缓慢燃烧、摔落（超过20格）或长期挤压。</p>
-                    <p>及时清理无用物品实体，避免在地面或漏斗链中大量堆积。</p>
-                </li>
-                <li class="rule-item">
-                    <strong>红石与更新抑制</strong>
-                    <p>禁止建造无意义的永久性高频红石电路。必要的高频（如树场、凋零骷髅塔）必须<strong>加装开关</strong>，并在不使用时关闭。</p>
-                    <p>允许在<strong>合理且必要</strong>的生产设施中使用更新抑制/跳变，但禁止建造纯粹为了娱乐或可能引起服务器崩溃/回档的大型实验性装置。</p>
-                </li>
-                <li class="rule-item">
-                    <strong>世界加载与内存</strong>
-                    <p>严格遵守服务器的分片加载规则。禁止在未经许可的情况下，在非必要区域私自创建大量长期加载的实体。</p>
-                    <p>利用维度加载特性的农场（如旅商农场），必须有明确的说明和开关。挂机结束后必须完全关闭。</p>
-                </li>
-            </ul>
-        </section>
-        
-        <section class="chapter" id="chapter3">
-            <h2 class="chapter-title"><i class="fas fa-mountain"></i> 第三章：建筑、领地与资源</h2>
-            <ul class="rule-list">
-                <li class="rule-item">
-                    <strong>土地与建筑</strong>
-                    <p>在建设大型设施前，请通过地图或传送寻找远离他人建筑的场地（建议间隔至少500格）。尊重他人的建筑空间和视野。</p>
-                    <p>公共工程（如主岛、地狱交通、末地主岛）需遵守统一的规划和建材风格。</p>
-                </li>
-                <li class="rule-item">
-                    <strong>资源采集</strong>
-                    <p>鼓励使用并维护服务器提供的公共设施（如公共凋零骷髅塔、猪灵交易站、史莱姆农场等）。取用资源时遵循"<strong>取一补一</strong>"或"<strong>按贡献度分配</strong>"的原则。</p>
-                    <p>在非私人领地进行的破坏性开采（如大型TNT挖矿机、凋灵炸矿），必须确保事后进行<strong>地形修复</strong>（铺回基岩层或至少填充表层），或选择在远离主世界的末地荒地。</p>
-                </li>
-            </ul>
-        </section>
-        
-        <section class="chapter" id="chapter4">
-            <h2 class="chapter-title"><i class="fas fa-users"></i> 第四章：社区与协作</h2>
-            <ul class="rule-list">
-                <li class="rule-item">
-                    <strong>共享与开源</strong>
-                    <p>鼓励分享生电装置的设计、原理和世界下载。对于从社区学习到的设计，建议在设施旁立牌注明原作者或灵感来源。</p>
-                </li>
-                <li class="rule-item">
-                    <strong>求助与教学</strong>
-                    <p>老玩家应耐心指导新玩家；新玩家提问前应善用搜索引擎和Wiki。</p>
-                </li>
-                <li class="rule-item">
-                    <strong>争议解决</strong>
-                    <p>玩家间因资源、设计抄袭等产生纠纷，应首先尝试私下沟通。若无法解决，可提供截图/坐标等证据，向管理员申请仲裁。</p>
-                </li>
-            </ul>
-        </section>
-        
-        <section class="chapter" id="chapter5">
-            <h2 class="chapter-title"><i class="fas fa-gavel"></i> 第五章：违规处理</h2>
-            <div class="warning">
-                <p><i class="fas fa-exclamation-triangle"></i> 违规行为将根据严重程度，受到以下一种或多种处罚：</p>
-            </div>
-            <div class="penalties">
-                <div class="penalty-item">
-                    <span class="penalty-number">1</span>
-                    <div>
-                        <strong>警告</strong>：首次、轻度违规。
+        <!-- 规则内容 -->
+        <div class="rules-container">
+            <!-- 基本行为准则 -->
+            <section id="basic-rules" class="rule-category">
+                <div class="category-header">
+                    <div class="category-icon">
+                        <i class="fas fa-user-check"></i>
+                    </div>
+                    <div class="category-title">
+                        <h2>基本行为准则</h2>
+                        <p>所有玩家必须遵守的基本规则</p>
                     </div>
                 </div>
-                <div class="penalty-item">
-                    <span class="penalty-number">2</span>
-                    <div>
-                        <strong>临时封禁</strong>：严重违规或多次警告无效，封禁时长视情节而定（1天至30天）。
+                
+                <div class="rules-list">
+                    <div class="rule-item">
+                        <div class="rule-item-header">
+                            <h3 class="rule-title">
+                                <i class="fas fa-shield-alt"></i>
+                                尊重所有玩家
+                            </h3>
+                            <span class="rule-severity">严重</span>
+                        </div>
+                        <div class="rule-description">
+                            <p>禁止任何形式的侮辱、歧视、骚扰、人身攻击或其他不尊重行为。包括但不限于：</p>
+                            <ul>
+                                <li>基于种族、民族、宗教、性别、性取向、年龄或残疾的歧视性言论</li>
+                                <li>针对其他玩家的恶意辱骂、人身攻击或诽谤</li>
+                                <li>发布令人不适的内容，包括色情、暴力、恐怖主义相关内容</li>
+                            </ul>
+                        </div>
+                        <div class="rule-penalty">
+                            <strong>处罚:</strong> 根据情节轻重，处以警告、禁言1-7天或永久封禁。
+                        </div>
+                    </div>
+                    
+                    <div class="rule-item">
+                        <div class="rule-item-header">
+                            <h3 class="rule-title">
+                                <i class="fas fa-ban"></i>
+                                禁止作弊与利用漏洞
+                            </h3>
+                            <span class="rule-severity danger">非常严重</span>
+                        </div>
+                        <div class="rule-description">
+                            <p>禁止使用任何作弊客户端、模组、外挂或利用游戏漏洞获取不正当优势。包括但不限于：</p>
+                            <ul>
+                                <li>使用X-Ray材质包或模组进行矿物透视</li>
+                                <li>使用飞行、速度、自动点击等作弊功能</li>
+                                <li>利用游戏漏洞复制物品、刷取资源</li>
+                                <li>使用任何未经服务器允许的客户端模组</li>
+                            </ul>
+                        </div>
+                        <div class="rule-penalty">
+                            <strong>处罚:</strong> 永久封禁，所有关联账号可能一并封禁。
+                        </div>
+                    </div>
+                    
+                    <div class="rule-item warning">
+                        <div class="rule-item-header">
+                            <h3 class="rule-title">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                禁止垃圾信息与刷屏
+                            </h3>
+                            <span class="rule-severity warning">中等</span>
+                        </div>
+                        <div class="rule-description">
+                            <p>禁止在聊天频道中发送垃圾信息、广告或刷屏，包括：</p>
+                            <ul>
+                                <li>重复发送相同或类似内容</li>
+                                <li>发送大量无意义字符或表情</li>
+                                <li>发布其他服务器广告或商业广告</li>
+                                <li>在错误频道讨论无关话题</li>
+                            </ul>
+                        </div>
+                        <div class="rule-penalty">
+                            <strong>处罚:</strong> 根据情节轻重，处以禁言1-24小时。
+                        </div>
                     </div>
                 </div>
-                <div class="penalty-item">
-                    <span class="penalty-number">3</span>
-                    <div>
-                        <strong>财产清除/回滚</strong>：对利用漏洞获取的非法财产进行清除，或对破坏的地形、建筑进行回滚。
+            </section>
+            
+            <!-- 游戏玩法规则 -->
+            <section id="gameplay-rules" class="rule-category">
+                <div class="category-header">
+                    <div class="category-icon">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <div class="category-title">
+                        <h2>游戏玩法规则</h2>
+                        <p>关于游戏玩法的具体规则</p>
                     </div>
                 </div>
-                <div class="penalty-item">
-                    <span class="penalty-number">4</span>
-                    <div>
-                        <strong>永久封禁</strong>：用于极端情况，如恶意破坏、长期作弊、严重人身攻击等。
+                
+                <div class="rules-list">
+                    <div class="rule-item danger">
+                        <div class="rule-item-header">
+                            <h3 class="rule-title">
+                                <i class="fas fa-skull-crossbones"></i>
+                                禁止恶意破坏 (Griefing)
+                            </h3>
+                            <span class="rule-severity danger">非常严重</span>
+                        </div>
+                        <div class="rule-description">
+                            <p>禁止任何形式的恶意破坏行为。包括但不限于：</p>
+                            <ul>
+                                <li>未经许可破坏、修改他人建筑或领地</li>
+                                <li>在他人领地内放置破坏性方块（如熔岩、水、TNT等）</li>
+                                <li>故意引怪到他人建筑或领地</li>
+                                <li>破坏公共设施或服务器建筑</li>
+                                <li>使用爆炸物（如床、重生锚）破坏环境</li>
+                            </ul>
+                            <p>注意：对于未设置领地保护的建筑，服务器不提供保护。建议所有玩家使用领地插件保护自己的建筑。</p>
+                        </div>
+                        <div class="rule-penalty">
+                            <strong>处罚:</strong> 永久封禁，并尽可能恢复被破坏的建筑。
+                        </div>
+                    </div>
+                    
+                    <div class="rule-item">
+                        <div class="rule-item-header">
+                            <h3 class="rule-title">
+                                <i class="fas fa-gem"></i>
+                                资源采集规则
+                            </h3>
+                            <span class="rule-severity">中等</span>
+                        </div>
+                        <div class="rule-description">
+                            <p>关于资源采集的规则：</p>
+                            <ul>
+                                <li>禁止在出生点附近过度采集资源，影响新玩家体验</li>
+                                <li>公共矿洞中请勿堵塞通道或独占资源点</li>
+                                <li>采集他人农场资源时，请遵循"取一补一"原则（如农作物）</li>
+                                <li>禁止使用机器大规模破坏地形（如世界吞噬者）</li>
+                            </ul>
+                        </div>
+                        <div class="rule-penalty">
+                            <strong>处罚:</strong> 根据情节轻重，处以警告、物品没收或临时封禁1-7天。
+                        </div>
+                    </div>
+                    
+                    <div class="rule-item warning">
+                        <div class="rule-item-header">
+                            <h3 class="rule-title">
+                                <i class="fas fa-paw"></i>
+                                生物与刷怪规则
+                            </h3>
+                            <span class="rule-severity warning">中等</span>
+                        </div>
+                        <div class="rule-description">
+                            <p>关于生物和刷怪的规则：</p>
+                            <ul>
+                                <li>禁止建造对服务器性能有严重影响的刷怪装置</li>
+                                <li>请及时清理不必要的生物，避免造成服务器卡顿</li>
+                                <li>禁止利用刷怪塔漏洞获取超额经验或物品</li>
+                                <li>公共刷怪塔请勿长时间独占使用</li>
+                            </ul>
+                        </div>
+                        <div class="rule-penalty">
+                            <strong>处罚:</strong> 根据情节轻重，处以警告或强制拆除违规装置。
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
-        
-        <section class="chapter" id="etiquette">
-            <h2 class="chapter-title"><i class="fas fa-handshake"></i> 生电玩家礼仪（非强制，但强烈建议）</h2>
-            <p>遵循这些礼仪将使服务器社区更加和谐、高效：</p>
-            <div class="etiquette-list">
-                <div class="etiquette-item">
-                    <i class="fas fa-bullhorn"></i>
-                    <h3>挂机通知</h3>
-                    <p>长时间挂机前，在相关频道告知大家，并确认农场开关已打开。</p>
+            </section>
+            
+            <!-- 建筑与领地规则 -->
+            <section id="building-rules" class="rule-category">
+                <div class="category-header">
+                    <div class="category-icon">
+                        <i class="fas fa-cube"></i>
+                    </div>
+                    <div class="category-title">
+                        <h2>建筑与领地规则</h2>
+                        <p>关于建筑和领地使用的规则</p>
+                    </div>
                 </div>
-                <div class="etiquette-item">
-                    <i class="fas fa-sign"></i>
-                    <h3>设施标注</h3>
-                    <p>在自己的大型设施旁用告示牌或物品展示框清晰标注：<strong>用途、开关位置、注意事项、维护者</strong>。</p>
+                
+                <div class="rules-list">
+                    <div class="rule-item">
+                        <div class="rule-item-header">
+                            <h3 class="rule-title">
+                                <i class="fas fa-expand-arrows-alt"></i>
+                                建筑间距要求
+                            </h3>
+                            <span class="rule-severity">一般</span>
+                        </div>
+                        <div class="rule-description">
+                            <p>为了确保所有玩家有足够的建筑空间，请遵守以下间距要求：</p>
+                            <ul>
+                                <li>主世界建筑之间至少保持50格距离</li>
+                                <li>大型建筑或建筑群应与其他玩家建筑保持100格以上距离</li>
+                                <li>禁止在他人建筑视野范围内建造不协调建筑</li>
+                                <li>在资源世界（如地狱、末地）请尊重他人正在使用的区域</li>
+                            </ul>
+                            <p>如有争议，管理员将根据具体情况裁决。</p>
+                        </div>
+                        <div class="rule-penalty">
+                            <strong>处罚:</strong> 根据情节轻重，处以警告或要求调整建筑位置。
+                        </div>
+                    </div>
+                    
+                    <div class="rule-item warning">
+                        <div class="rule-item-header">
+                            <h3 class="rule-title">
+                                <i class="fas fa-landmark"></i>
+                                领地使用规则
+                            </h3>
+                            <span class="rule-severity warning">中等</span>
+                        </div>
+                        <div class="rule-description">
+                            <p>关于领地插件的使用规则：</p>
+                            <ul>
+                                <li>禁止滥用领地插件圈占过多土地（特别是资源丰富区域）</li>
+                                <li>长期不活跃玩家（超过3个月）的领地可能被回收</li>
+                                <li>公共区域（如出生点、主城）禁止设立私人领地</li>
+                                <li>领地命名应保持适当，禁止使用冒犯性名称</li>
+                                <li>请勿在领地内设置过于复杂的红石装置，以免影响服务器性能</li>
+                            </ul>
+                        </div>
+                        <div class="rule-penalty">
+                            <strong>处罚:</strong> 根据情节轻重，处以领地重置、缩减或删除。
+                        </div>
+                    </div>
+                    
+                    <div class="rule-item">
+                        <div class="rule-item-header">
+                            <h3 class="rule-title">
+                                <i class="fas fa-dungeon"></i>
+                                地下建筑规则
+                            </h3>
+                            <span class="rule-severity">一般</span>
+                        </div>
+                        <div class="rule-description">
+                            <p>关于地下建筑的规则：</p>
+                            <ul>
+                                <li>地下建筑同样需要申请领地保护</li>
+                                <li>挖掘地下结构时请注意不要破坏他人地下建筑</li>
+                                <li>大型地下工程应在地面设置明显标记，避免其他玩家误挖</li>
+                                <li>废弃矿洞改造时，请勿完全封锁原始矿洞通道</li>
+                            </ul>
+                        </div>
+                        <div class="rule-penalty">
+                            <strong>处罚:</strong> 根据情节轻重，处以警告或要求修复破坏。
+                        </div>
+                    </div>
                 </div>
-                <div class="etiquette-item">
-                    <i class="fas fa-save"></i>
-                    <h3>备份意识</h3>
-                    <p>对超大型红石工程，建议自行进行世界备份，以防意外崩溃导致心血白费。</p>
+            </section>
+            
+            <!-- 社区互动规则 -->
+            <section id="community-rules" class="rule-category">
+                <div class="category-header">
+                    <div class="category-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="category-title">
+                        <h2>社区互动规则</h2>
+                        <p>玩家间互动与社区活动规则</p>
+                    </div>
                 </div>
-                <div class="etiquette-item">
-                    <i class="fas fa-subway"></i>
-                    <h3>交通礼仪</h3>
-                    <p>使用地狱交通网时，不要在冰道中间停下，离开时请将矿车收回。</p>
+                
+                <div class="rules-list">
+                    <div class="rule-item">
+                        <div class="rule-item-header">
+                            <h3 class="rule-title">
+                                <i class="fas fa-handshake"></i>
+                                玩家间纠纷处理
+                            </h3>
+                            <span class="rule-severity">一般</span>
+                        </div>
+                        <div class="rule-description">
+                            <p>玩家间发生纠纷时应按以下流程处理：</p>
+                            <ul>
+                                <li>首先尝试与对方友好沟通解决问题</li>
+                                <li>如无法解决，可向在线管理员或OP求助</li>
+                                <li>禁止在公共频道争吵或煽动其他玩家参与纠纷</li>
+                                <li>禁止因个人纠纷对其他玩家进行报复行为</li>
+                                <li>提供证据时请使用截图或录屏，而非口述</li>
+                            </ul>
+                        </div>
+                        <div class="rule-penalty">
+                            <strong>处罚:</strong> 在公共频道争吵可能被禁言，报复行为将受到额外处罚。
+                        </div>
+                    </div>
+                    
+                    <div class="rule-item warning">
+                        <div class="rule-item-header">
+                            <h3 class="rule-title">
+                                <i class="fas fa-microphone-alt"></i>
+                                语音聊天规则
+                            </h3>
+                            <span class="rule-severity warning">中等</span>
+                        </div>
+                        <div class="rule-description">
+                            <p>使用服务器语音聊天时的规则：</p>
+                            <ul>
+                                <li>禁止在语音频道中播放嘈杂音乐或背景音</li>
+                                <li>避免长时间占用语音频道闲聊与游戏无关内容</li>
+                                <li>尊重其他玩家，避免在语音频道中争吵</li>
+                                <li>请使用适当的音量，避免影响他人体验</li>
+                                <li>如使用语音mod，请确保其不会影响服务器性能</li>
+                            </ul>
+                        </div>
+                        <div class="rule-penalty">
+                            <strong>处罚:</strong> 根据情节轻重，处以语音权限限制或禁言。
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 交易与经济规则 -->
+            <section id="trade-rules" class="rule-category">
+                <div class="category-header">
+                    <div class="category-icon">
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    <div class="category-title">
+                        <h2>交易与经济规则</h2>
+                        <p>关于玩家间交易与经济系统的规则</p>
+                    </div>
+                </div>
+                
+                <div class="rules-list">
+                    <div class="rule-item danger">
+                        <div class="rule-item-header">
+                            <h3 class="rule-title">
+                                <i class="fas fa-exclamation-circle"></i>
+                                禁止欺诈与不诚信交易
+                            </h3>
+                            <span class="rule-severity danger">非常严重</span>
+                        </div>
+                        <div class="rule-description">
+                            <p>禁止任何形式的欺诈或不诚信交易行为。包括但不限于：</p>
+                            <ul>
+                                <li>交易时提供虚假物品描述或数量</li>
+                                <li>承诺交易后不履行承诺</li>
+                                <li>利用游戏漏洞或机制进行不公平交易</li>
+                                <li>设立虚假商店或交易点欺骗玩家</li>
+                                <li>使用第三方工具修改交易内容</li>
+                            </ul>
+                            <p>所有交易应基于诚信原则，交易前请确认物品和数量。</p>
+                        </div>
+                        <div class="rule-penalty">
+                            <strong>处罚:</strong> 根据情节轻重，处以交易物品追回、经济处罚或永久封禁。
+                        </div>
+                    </div>
+                    
+                    <div class="rule-item">
+                        <div class="rule-item-header">
+                            <h3 class="rule-title">
+                                <i class="fas fa-store"></i>
+                                商店与市场规则
+                            </h3>
+                            <span class="rule-severity">中等</span>
+                        </div>
+                        <div class="rule-description">
+                            <p>在服务器市场或商店区域经营的规则：</p>
+                            <ul>
+                                <li>商店应明确标价，避免模糊定价</li>
+                                <li>禁止垄断某种资源并恶意抬高价格</li>
+                                <li>长期不经营的商店可能被管理员清理</li>
+                                <li>商店建筑应保持整洁，不影响市场区域美观</li>
+                                <li>使用服务器经济系统时请遵守相关插件规则</li>
+                            </ul>
+                        </div>
+                        <div class="rule-penalty">
+                            <strong>处罚:</strong> 根据情节轻重，处以警告、商店关闭或经济处罚。
+                        </div>
+                    </div>
+                    
+                    <div class="rule-item warning">
+                        <div class="rule-item-header">
+                            <h3 class="rule-title">
+                                <i class="fas fa-gift"></i>
+                                礼物与赠予规则
+                            </h3>
+                            <span class="rule-severity warning">中等</span>
+                        </div>
+                        <div class="rule-description">
+                            <p>关于玩家间礼物赠送的规则：</p>
+                            <ul>
+                                <li>赠予贵重物品前请确认对方身份，避免误赠</li>
+                                <li>禁止以赠予为名进行违规物品转移</li>
+                                <li>赠予后如非欺诈情况，一般不提供追回服务</li>
+                                <li>管理员不参与玩家间的赠予纠纷，除非涉及欺诈</li>
+                            </ul>
+                        </div>
+                        <div class="rule-penalty">
+                            <strong>处罚:</strong> 利用赠予系统进行违规操作将受到相应处罚。
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 重要提醒 -->
+            <div class="important-notice">
+                <div class="important-notice-content">
+                    <h3><i class="fas fa-exclamation-triangle"></i> 重要提醒</h3>
+                    <p><strong>最终解释权:</strong> 服务器管理员对规则拥有最终解释权，并有权根据实际情况对规则进行修改或补充。</p>
+                    <p><strong>规则更新:</strong> 本守则可能不定期更新，请玩家定期查阅最新版本。规则更新后，旧版本自动失效。</p>
+                    <p><strong>处罚申诉:</strong> 如对处罚有异议，可在封禁后7天内通过邮箱 mcworld@dreamworld.eu.org 申诉，需提供充分证据。</p>
+                    <p><strong>漏洞报告:</strong> 发现游戏漏洞或安全问题，请立即向管理员报告。主动报告漏洞的玩家可能获得奖励，利用漏洞将受到严厉处罚。</p>
                 </div>
             </div>
-        </section>
-        
-        <section class="chapter" id="final-note">
-            <h2 class="chapter-title"><i class="fas fa-exclamation-circle"></i> 最后须知</h2>
-            <div class="danger">
-                <p><i class="fas fa-ban"></i> <strong>重要提示：</strong>本守则将随着游戏版本更新和服务器发展进行调整。最终解释权归服务器管理组所有。加入本服务器即视为同意遵守以上全部规则。</p>
-            </div>
-            <div class="highlight pulse" style="margin-top: 1.5rem; text-align: center;">
-                <p style="font-size: 1.2rem;"><i class="fas fa-crown"></i> 祝你在生电的世界里创造奇迹！</p>
-            </div>
-        </section>
+        </div>
     </main>
-    
+
+    <!-- 页脚 -->
     <footer>
-        <p>Dream World Minecraft 生电服务器管理组</p>
-        <p class="server-info">版本：1.21.1 | 最后更新：2025年12月</p>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>DreamWorld 服务器</h3>
+                    <p style="color: var(--gray-400); margin-top: 12px;">一个友好、公平的Minecraft生存服务器，致力于为玩家提供最佳的游戏体验。</p>
+                    <p style="color: var(--gray-400); margin-top: 12px;">服务器管理员邮箱：mcworld@dreamworld.eu.org</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>快速链接</h3>
+                    <ul class="footer-links">
+                        <li><a href="https://dreamworld.eu.org"><i class="fas fa-chevron-right"></i> 主页</a></li>
+                        <li><a href="https://rules.dreamworld.eu.org"><i class="fas fa-chevron-right"></i> 玩家守则</a></li>
+                        <li><a href="https://help.dreamworld.eu.org"><i class="fas fa-chevron-right"></i> 帮助与指令</a></li>
+                        <li><a href="https://banlist.dreamworld.eu.org"><i class="fas fa-chevron-right"></i> 封神榜</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>连接信息</h3>
+                    <ul class="footer-links">
+                        <li><a><i class="fas fa-server"></i> <span style="font-family: 'JetBrains Mono', monospace; color: var(--gray-400);">play.simpfun.cn:30808</span></a></li>
+                        <li><a><i class="fas fa-code-branch"></i> JAVA 1.21.1</a></li>
+                        <li><a><i class="fas fa-plug"></i> JAVA版 & 基岩版</a></li>
+                        <li><a><i class="fas fa-exclamation-circle"></i> 背包不互通</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025-2026 DreamWorld Minecraft服务器 版权所有</p>
+                <p style="margin-top: 8px;">本服务器与Mojang Studios没有官方关联。Minecraft是Mojang Studios的商标。</p>
+                <p style="margin-top: 8px;">最后更新：2025年1月20日</p>
+            </div>
+        </div>
     </footer>
 
     <script>
-        // 页面加载完成后添加loaded类，触发淡入效果
-        window.addEventListener("load", function() {
-            document.body.classList.add("loaded");
+        // 移动端菜单切换
+        document.getElementById('mobileMenuToggle').addEventListener('click', function() {
+            const nav = document.getElementById('mainNav');
+            const isActive = nav.classList.toggle('active');
             
-            // 滚动动画 - 当章节进入视口时添加动画类
-            const chapters = document.querySelectorAll('.chapter');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('in-view');
-                    }
-                });
-            }, { threshold: 0.1 });
-            
-            chapters.forEach(chapter => {
-                observer.observe(chapter);
-            });
-            
-            // 为当前页面导航项添加活动状态
-            const currentPageLink = document.querySelector('nav ul li a[href*="rules"]');
-            if (currentPageLink) {
-                currentPageLink.classList.add('active');
+            // 切换图标
+            const icon = this.querySelector('i');
+            if (isActive) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+                this.setAttribute('aria-label', '关闭菜单');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+                this.setAttribute('aria-label', '打开菜单');
             }
             
-            // 为所有内部链接添加平滑滚动
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href');
-                    if (targetId === '#') return;
+            // 防止滚动
+            document.body.style.overflow = isActive ? 'hidden' : '';
+        });
+        
+        // 点击导航链接时关闭移动菜单
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', function() {
+                const nav = document.getElementById('mainNav');
+                const toggleBtn = document.getElementById('mobileMenuToggle');
+                
+                if (nav.classList.contains('active')) {
+                    nav.classList.remove('active');
+                    toggleBtn.querySelector('i').classList.remove('fa-times');
+                    toggleBtn.querySelector('i').classList.add('fa-bars');
+                    toggleBtn.setAttribute('aria-label', '打开菜单');
+                    document.body.style.overflow = '';
+                }
+            });
+        });
+        
+        // 规则分类导航滚动和点击处理
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.rules-nav a');
+            const sections = document.querySelectorAll('.rule-category');
+            
+            // 移除所有active类
+            function removeActiveClasses() {
+                navLinks.forEach(link => link.classList.remove('active'));
+            }
+            
+            // 监听滚动，高亮当前可见部分
+            function highlightVisibleSection() {
+                let currentSection = '';
+                const scrollPosition = window.scrollY + 120; // 偏移量，使导航更灵敏
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
                     
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
+                    if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                        currentSection = section.getAttribute('id');
+                    }
+                });
+                
+                // 更新导航链接
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').substring(1) === currentSection) {
+                        link.classList.add('active');
+                    }
+                });
+                
+                // 如果没有高亮部分，默认高亮第一个
+                if (!currentSection && navLinks.length > 0) {
+                    navLinks[0].classList.add('active');
+                }
+            }
+            
+            // 点击导航链接平滑滚动
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetSection = document.getElementById(targetId);
+                    
+                    if (targetSection) {
+                        // 更新active状态
+                        removeActiveClasses();
+                        this.classList.add('active');
+                        
+                        // 平滑滚动到目标
+                        const headerHeight = document.querySelector('header').offsetHeight;
+                        const targetPosition = targetSection.offsetTop - headerHeight - 20;
+                        
                         window.scrollTo({
-                            top: targetElement.offsetTop - 80,
+                            top: targetPosition,
                             behavior: 'smooth'
                         });
                     }
                 });
             });
             
-            // 为每个规则项添加点击效果
-            document.querySelectorAll('.rule-item').forEach(item => {
-                item.addEventListener('click', function() {
-                    this.style.backgroundColor = 'rgba(76, 175, 80, 0.05)';
-                    setTimeout(() => {
-                        this.style.backgroundColor = '';
-                    }, 300);
-                });
-            });
+            // 监听滚动事件
+            window.addEventListener('scroll', highlightVisibleSection, { passive: true });
             
-            // 添加键盘快捷键：按ESC键回到顶部
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape') {
-                    window.scrollTo({
-                        top: 0,
-                        behavior: 'smooth'
-                    });
+            // 初始高亮
+            setTimeout(highlightVisibleSection, 100);
+            
+            // 当前页面高亮
+            const mainNavLinks = document.querySelectorAll('nav a');
+            const currentPage = window.location.href;
+            mainNavLinks.forEach(link => {
+                if (link.href === currentPage) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
                 }
             });
+            
+            // 移动端触摸优化
+            let touchStartY = 0;
+            
+            document.addEventListener('touchstart', function(e) {
+                touchStartY = e.touches[0].clientY;
+            }, { passive: true });
+            
+            // 防止在滚动时意外点击
+            document.addEventListener('touchmove', function(e) {
+                // 添加一些触摸反馈
+                if (Math.abs(e.touches[0].clientY - touchStartY) > 10) {
+                    // 用户正在滚动，可以添加视觉反馈
+                }
+            }, { passive: true });
+            
+            // 移动端加载优化
+            if ('loading' in HTMLImageElement.prototype) {
+                // 浏览器支持原生懒加载
+                const images = document.querySelectorAll('img');
+                images.forEach(img => {
+                    img.loading = 'lazy';
+                });
+            }
         });
+        
+        // 修复移动端视口缩放问题
+        document.addEventListener('touchmove', function(e) {
+            if (e.scale !== 1) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+        
+        // 防止双击缩放
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function(e) {
+            const now = Date.now();
+            if (now - lastTouchEnd <= 300) {
+                e.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
     </script>
 </body>
 </html>
