@@ -45,12 +45,6 @@
             box-sizing: border-box;
         }
 
-        html {
-            scroll-behavior: smooth;
-            -webkit-text-size-adjust: 100%;
-            -ms-text-size-adjust: 100%;
-        }
-
         body {
             font-family: 'Inter', sans-serif;
             line-height: 1.6;
@@ -59,17 +53,9 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
         }
 
-        /* 优化触摸体验 */
-        a, button, .rule-item, .nav-card {
-            -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
-            tap-highlight-color: rgba(0, 0, 0, 0.1);
-        }
-
-        /* 头部样式 - 移动端优化 */
+        /* 头部样式 */
         header {
             background-color: var(--white);
             box-shadow: var(--shadow-sm);
@@ -77,77 +63,54 @@
             top: 0;
             z-index: 100;
             backdrop-filter: blur(10px);
-            background-color: rgba(255, 255, 255, 0.98);
-            height: 60px;
-            border-bottom: 1px solid var(--gray-200);
+            background-color: rgba(255, 255, 255, 0.95);
         }
 
         .container {
             width: 100%;
             max-width: 1280px;
             margin: 0 auto;
-            padding: 0 16px;
-        }
-
-        /* 移动端优化容器内边距 */
-        @media (max-width: 768px) {
-            .container {
-                padding: 0 12px;
-            }
+            padding: 0 24px;
         }
 
         .header-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            height: 100%;
+            height: 72px;
         }
 
         .logo {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             text-decoration: none;
             color: var(--gray-900);
-            min-width: 0;
         }
 
         .logo-icon {
-            width: 36px;
-            height: 36px;
+            width: 40px;
+            height: 40px;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: var(--radius-xs);
+            border-radius: var(--radius-sm);
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--white);
-            font-size: 1rem;
-            flex-shrink: 0;
-        }
-
-        .logo-text {
-            min-width: 0;
-            overflow: hidden;
+            font-size: 1.25rem;
         }
 
         .logo-text h1 {
-            font-size: 1.25rem;
+            font-size: 1.5rem;
             font-weight: 700;
             line-height: 1.2;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
         }
 
         .logo-text p {
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             color: var(--gray-500);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
         }
 
-        /* 桌面端导航 */
         nav ul {
             display: flex;
             list-style: none;
@@ -157,20 +120,19 @@
         nav a {
             color: var(--gray-700);
             text-decoration: none;
-            padding: 8px 12px;
-            border-radius: var(--radius-xs);
+            padding: 10px 16px;
+            border-radius: var(--radius-sm);
             transition: var(--transition);
             font-weight: 500;
             display: flex;
             align-items: center;
-            gap: 6px;
-            font-size: 0.9rem;
-            white-space: nowrap;
+            gap: 8px;
         }
 
         nav a:hover {
             background-color: var(--gray-100);
             color: var(--primary);
+            transform: translateY(-2px);
         }
 
         nav a.active {
@@ -178,110 +140,29 @@
             color: var(--primary);
         }
 
-        /* 移动端菜单按钮 */
         .mobile-menu-toggle {
             display: none;
             background: none;
             border: none;
             color: var(--gray-700);
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             cursor: pointer;
             padding: 8px;
-            border-radius: var(--radius-xs);
-            width: 44px;
-            height: 44px;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-        }
-
-        .mobile-menu-toggle:hover, .mobile-menu-toggle:active {
-            background-color: var(--gray-100);
-        }
-
-        /* 移动端导航菜单 */
-        #mobile-nav {
-            display: none;
-            background-color: var(--white);
-            border-top: 1px solid var(--gray-200);
-            padding: 16px;
-            position: absolute;
-            top: 60px;
-            left: 0;
-            right: 0;
-            box-shadow: var(--shadow-md);
-            z-index: 99;
-        }
-
-        #mobile-nav:target {
-            display: block;
-        }
-
-        #mobile-nav ul {
-            flex-direction: column;
-            gap: 8px;
-            list-style: none;
-        }
-
-        #mobile-nav li {
-            width: 100%;
-        }
-
-        #mobile-nav a {
-            justify-content: flex-start;
-            padding: 14px 16px;
-            width: 100%;
             border-radius: var(--radius-sm);
-            font-size: 1rem;
-            color: var(--gray-700);
             text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transition: var(--transition);
         }
 
-        #mobile-nav a:hover {
+        .mobile-menu-toggle:hover {
             background-color: var(--gray-100);
-            color: var(--primary);
         }
 
-        #mobile-nav .close-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            width: 44px;
-            height: 44px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            color: var(--gray-600);
-            text-decoration: none;
-            border-radius: var(--radius-xs);
-        }
-
-        #mobile-nav .close-btn:hover {
-            background-color: var(--gray-100);
-            color: var(--danger);
-        }
-
-        /* 主要内容样式 - 移动端优化 */
+        /* 主要内容样式 */
         main {
             flex: 1;
-            padding: 40px 0;
-            width: 100%;
         }
 
-        @media (max-width: 768px) {
-            main {
-                padding: 32px 0;
-            }
-        }
-
-        /* 英雄区域 */
         .hero {
-            padding: 60px 0 40px;
+            padding: 80px 0 48px;
             position: relative;
             overflow: hidden;
         }
@@ -326,172 +207,214 @@
             animation: fadeInUp 0.8s ease-out 0.2s both;
         }
 
-        /* 规则分类导航 - 移动端优化 */
-        .rules-nav {
-            background-color: var(--white);
-            border-radius: var(--radius);
-            padding: 12px;
-            margin-bottom: 24px;
-            box-shadow: var(--shadow);
-            border: 1px solid var(--gray-200);
-            animation: fadeInUp 0.8s ease-out 0.4s both;
-        }
-
-        .rules-nav ul {
-            display: flex;
-            flex-wrap: nowrap;
-            list-style: none;
-            gap: 6px;
-            justify-content: flex-start;
-            overflow-x: auto;
-            overflow-y: hidden;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: none;
-            padding-bottom: 4px;
-        }
-
-        .rules-nav ul::-webkit-scrollbar {
+        /* 移动端导航菜单 */
+        #mobile-nav {
             display: none;
+            background-color: var(--white);
+            border-top: 1px solid var(--gray-200);
+            padding: 16px;
+            position: absolute;
+            top: 72px;
+            left: 0;
+            right: 0;
+            box-shadow: var(--shadow-md);
+            z-index: 99;
         }
 
-        .rules-nav li {
-            flex-shrink: 0;
+        #mobile-nav:target {
+            display: block;
+            animation: fadeInUp 0.3s ease-out;
         }
 
-        .rules-nav a {
+        #mobile-nav ul {
+            flex-direction: column;
+            gap: 8px;
+            list-style: none;
+        }
+
+        #mobile-nav li {
+            width: 100%;
+        }
+
+        #mobile-nav a {
+            justify-content: flex-start;
+            padding: 12px 16px;
+            width: 100%;
+            border-radius: var(--radius-sm);
+            font-size: 1rem;
             color: var(--gray-700);
             text-decoration: none;
-            padding: 10px 14px;
-            border-radius: var(--radius-xs);
-            transition: var(--transition);
-            font-weight: 500;
-            font-size: 0.85rem;
             display: flex;
             align-items: center;
-            gap: 6px;
-            white-space: nowrap;
-            border: 1px solid transparent;
+            gap: 10px;
+            transition: var(--transition);
         }
 
-        .rules-nav a:hover {
+        #mobile-nav a:hover {
             background-color: var(--gray-100);
             color: var(--primary);
-            transform: translateY(-2px);
         }
 
-        /* 高亮当前部分 */
-        .rule-category:target {
-            box-shadow: var(--shadow-lg);
-            border-color: var(--primary);
-            animation: highlightPulse 2s ease-in-out;
-        }
-
-        .rule-category:target .category-header {
-            border-bottom-color: var(--primary);
-        }
-
-        /* 规则内容区域 */
-        .rules-container {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 24px;
-        }
-
-        .rule-category {
-            background-color: var(--white);
-            border-radius: var(--radius);
-            padding: 28px;
-            box-shadow: var(--shadow);
-            border: 1px solid var(--gray-200);
-            transition: var(--transition);
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 0.6s ease-out forwards;
-        }
-
-        .rule-category:nth-child(1) { animation-delay: 0.1s; }
-        .rule-category:nth-child(2) { animation-delay: 0.2s; }
-        .rule-category:nth-child(3) { animation-delay: 0.3s; }
-        .rule-category:nth-child(4) { animation-delay: 0.4s; }
-        .rule-category:nth-child(5) { animation-delay: 0.5s; }
-
-        .rule-category:hover {
-            box-shadow: var(--shadow-md);
-            border-color: var(--primary-light);
-            transform: translateY(-5px);
-        }
-
-        .category-header {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            margin-bottom: 28px;
-            padding-bottom: 16px;
-            border-bottom: 2px solid var(--gray-100);
-        }
-
-        .category-icon {
-            width: 52px;
-            height: 52px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: var(--radius);
+        #mobile-nav .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 44px;
+            height: 44px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--white);
-            font-size: 1.4rem;
-            flex-shrink: 0;
+            font-size: 1.5rem;
+            color: var(--gray-600);
+            text-decoration: none;
+            border-radius: var(--radius-xs);
         }
 
-        .category-title h2 {
-            font-size: 1.6rem;
+        #mobile-nav .close-btn:hover {
+            background-color: var(--gray-100);
+            color: var(--danger);
+        }
+
+        /* 规则分类导航 */
+        .category-nav {
+            margin: 32px 0;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+
+        .category-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            list-style: none;
+        }
+
+        .category-btn {
+            padding: 12px 24px;
+            background-color: var(--white);
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius);
+            color: var(--gray-700);
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+        }
+
+        .category-btn:hover {
+            background-color: var(--gray-50);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .category-btn:target, .category-btn.active {
+            background-color: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+        }
+
+        .category-btn i {
+            font-size: 1rem;
+        }
+
+        /* 规则类别区域 */
+        .rules-section {
+            margin: 48px 0 96px;
+        }
+
+        .rules-section:target {
+            animation: fadeInUp 0.5s ease-out;
+        }
+
+        .category-title {
+            margin-bottom: 32px;
+            position: relative;
+            padding-bottom: 16px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .category-title h3 {
+            font-size: 2rem;
             font-weight: 700;
             color: var(--gray-900);
-            margin-bottom: 4px;
-            line-height: 1.3;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .category-title h3 i {
+            color: var(--primary);
         }
 
         .category-title p {
+            font-size: 1.125rem;
             color: var(--gray-600);
-            font-size: 0.95rem;
-            line-height: 1.4;
+            max-width: 800px;
         }
 
-        /* 规则列表 */
+        .category-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+
+        /* 规则内容样式 */
+        .rules-container {
+            background-color: var(--white);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--gray-200);
+            margin-bottom: 48px;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
         .rules-list {
             display: flex;
             flex-direction: column;
-            gap: 20px;
         }
 
         .rule-item {
-            padding: 18px;
-            border-radius: var(--radius-sm);
-            background-color: var(--gray-50);
-            border-left: 4px solid var(--primary);
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--gray-200);
             transition: var(--transition);
             opacity: 0;
-            transform: translateX(-10px);
-            animation: slideInRight 0.5s ease-out forwards;
+            transform: translateY(10px);
+            animation: fadeInUp 0.5s ease-out forwards;
         }
 
-        .rule-item:nth-child(1) { animation-delay: 0.3s; }
-        .rule-item:nth-child(2) { animation-delay: 0.4s; }
-        .rule-item:nth-child(3) { animation-delay: 0.5s; }
-        .rule-item:nth-child(4) { animation-delay: 0.6s; }
+        .rule-item:nth-child(1) { animation-delay: 0.1s; }
+        .rule-item:nth-child(2) { animation-delay: 0.2s; }
+        .rule-item:nth-child(3) { animation-delay: 0.3s; }
+        .rule-item:nth-child(4) { animation-delay: 0.4s; }
+        .rule-item:nth-child(5) { animation-delay: 0.5s; }
+
+        .rule-item:last-child {
+            border-bottom: none;
+        }
 
         .rule-item:hover {
-            background-color: var(--gray-100);
-            transform: translateX(5px);
+            background-color: var(--gray-50);
         }
 
         .rule-item.warning {
-            border-left-color: var(--warning);
+            border-left: 4px solid var(--warning);
             background-color: var(--warning-light);
         }
 
         .rule-item.danger {
-            border-left-color: var(--danger);
+            border-left: 4px solid var(--danger);
             background-color: var(--danger-light);
         }
 
@@ -500,7 +423,7 @@
             align-items: flex-start;
             justify-content: space-between;
             margin-bottom: 12px;
-            gap: 12px;
+            gap: 16px;
         }
 
         .rule-title {
@@ -509,7 +432,7 @@
             color: var(--gray-900);
             display: flex;
             align-items: flex-start;
-            gap: 8px;
+            gap: 10px;
             line-height: 1.4;
             flex: 1;
         }
@@ -543,6 +466,7 @@
             color: var(--gray-700);
             line-height: 1.7;
             font-size: 0.95rem;
+            margin-bottom: 16px;
         }
 
         .rule-description ul {
@@ -557,13 +481,12 @@
         }
 
         .rule-penalty {
-            margin-top: 14px;
-            padding: 12px;
+            padding: 12px 16px;
             background-color: var(--white);
             border-radius: var(--radius-sm);
             border: 1px solid var(--gray-200);
             font-size: 0.9rem;
-            animation: fadeIn 0.5s ease-out 0.3s both;
+            margin-top: 8px;
         }
 
         .rule-penalty strong {
@@ -576,356 +499,72 @@
             position: relative;
             background: linear-gradient(135deg, var(--warning-light) 0%, var(--primary-light) 100%);
             border-left: 4px solid var(--warning);
-            animation: pulse 2s infinite;
-        }
-
-        .mining-rule::before {
-            content: '新规则';
-            position: absolute;
-            top: -8px;
-            right: -8px;
-            background: linear-gradient(135deg, var(--warning), var(--danger));
-            color: white;
-            font-size: 0.6rem;
-            font-weight: 600;
-            padding: 4px 8px;
-            border-radius: 10px;
-            z-index: 1;
         }
 
         .mining-rule .rule-title i {
             color: var(--warning);
-            animation: bounce 1s infinite;
+        }
+
+        .mining-note {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 6px 12px;
+            background-color: var(--white);
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--warning);
+            font-size: 0.85rem;
+            color: var(--gray-700);
+        }
+
+        .mining-note a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .mining-note a:hover {
+            text-decoration: underline;
         }
 
         /* 重要提醒 */
-        .important-notice {
-            background: linear-gradient(135deg, var(--primary-light) 0%, var(--secondary-light) 100%);
+        .important-note {
+            background: linear-gradient(135deg, var(--warning-light) 0%, var(--primary-light) 100%);
             border-radius: var(--radius);
-            padding: 28px;
-            margin-top: 40px;
-            border: 1px solid var(--primary);
-            position: relative;
-            overflow: hidden;
-            animation: fadeInUp 0.8s ease-out 0.8s both;
+            padding: 24px;
+            margin: 48px 0;
+            border-left: 5px solid var(--warning);
+            animation: fadeInUp 0.8s ease-out 0.6s both;
         }
 
-        .important-notice::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none"/><path d="M0,0 L100,100" stroke="%2310B981" stroke-width="1" opacity="0.1"/><path d="M100,0 L0,100" stroke="%2310B981" stroke-width="1" opacity="0.1"/></svg>');
-            opacity: 0.1;
-            z-index: 0;
-        }
-
-        .important-notice-content {
-            position: relative;
-            z-index: 1;
-        }
-
-        .important-notice h3 {
-            font-size: 1.4rem;
-            font-weight: 700;
+        .important-note h4 {
+            font-size: 1.25rem;
+            font-weight: 600;
             color: var(--gray-900);
-            margin-bottom: 16px;
+            margin-bottom: 12px;
             display: flex;
             align-items: center;
-            gap: 10px;
-            line-height: 1.3;
+            gap: 8px;
         }
 
-        .important-notice h3 i {
+        .important-note h4 i {
             color: var(--warning);
         }
 
-        .important-notice p {
-            color: var(--gray-800);
-            margin-bottom: 14px;
-            line-height: 1.6;
-            font-size: 0.95rem;
+        .important-note p {
+            font-size: 0.875rem;
+            color: var(--gray-700);
+            margin-bottom: 8px;
         }
 
-        .important-notice ul {
+        .important-note ul {
             margin-left: 20px;
             margin-top: 12px;
         }
 
-        .important-notice li {
+        .important-note li {
             margin-bottom: 8px;
-            color: var(--gray-800);
+            color: var(--gray-700);
             line-height: 1.5;
-        }
-
-        /* 页脚 - 移动端优化 */
-        footer {
-            background-color: var(--gray-900);
-            color: var(--gray-300);
-            padding: 48px 0 24px;
-            margin-top: 64px;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 36px;
-            margin-bottom: 36px;
-        }
-
-        .footer-section h3 {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: var(--white);
-            margin-bottom: 20px;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 10px;
-        }
-
-        .footer-links a {
-            color: var(--gray-400);
-            text-decoration: none;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.9rem;
-            padding: 4px 0;
-        }
-
-        .footer-links a:hover {
-            color: var(--primary-light);
-            transform: translateX(4px);
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 24px;
-            border-top: 1px solid var(--gray-800);
-            color: var(--gray-500);
-            font-size: 0.85rem;
-            line-height: 1.5;
-        }
-
-        /* 移动端优化样式 */
-        @media (max-width: 768px) {
-            /* 头部优化 */
-            header {
-                height: 56px;
-            }
-            
-            .mobile-menu-toggle {
-                display: flex;
-            }
-            
-            /* 隐藏桌面导航，显示移动导航 */
-            #desktop-nav {
-                display: none;
-            }
-            
-            /* 英雄区域优化 */
-            .hero h2 {
-                font-size: 2.25rem;
-            }
-            
-            .hero p {
-                font-size: 1rem;
-            }
-            
-            /* 规则导航优化 */
-            .rules-nav {
-                padding: 10px;
-                margin-left: -12px;
-                margin-right: -12px;
-                border-radius: 0;
-                border-left: none;
-                border-right: none;
-            }
-            
-            .rules-nav ul {
-                padding-bottom: 6px;
-            }
-            
-            .rules-nav a {
-                padding: 10px 12px;
-                font-size: 0.8rem;
-            }
-            
-            /* 规则分类优化 */
-            .rule-category {
-                padding: 20px;
-                border-radius: var(--radius-sm);
-            }
-            
-            .category-header {
-                flex-direction: column;
-                text-align: center;
-                gap: 12px;
-                margin-bottom: 24px;
-            }
-            
-            .category-icon {
-                width: 48px;
-                height: 48px;
-                font-size: 1.2rem;
-            }
-            
-            .category-title h2 {
-                font-size: 1.4rem;
-            }
-            
-            .category-title p {
-                font-size: 0.9rem;
-            }
-            
-            /* 规则项优化 */
-            .rule-item {
-                padding: 16px;
-            }
-            
-            .rule-item-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
-            }
-            
-            .rule-title {
-                font-size: 1.05rem;
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 6px;
-            }
-            
-            .rule-severity {
-                align-self: flex-start;
-            }
-            
-            .rule-description {
-                font-size: 0.9rem;
-            }
-            
-            .rule-description ul {
-                margin-left: 16px;
-            }
-            
-            .rule-penalty {
-                font-size: 0.85rem;
-                padding: 10px;
-            }
-            
-            /* 重要提醒优化 */
-            .important-notice {
-                padding: 22px;
-                margin-top: 32px;
-            }
-            
-            .important-notice h3 {
-                font-size: 1.3rem;
-            }
-            
-            .important-notice p {
-                font-size: 0.9rem;
-            }
-            
-            /* 页脚优化 */
-            footer {
-                padding: 40px 0 20px;
-                margin-top: 48px;
-            }
-            
-            .footer-content {
-                grid-template-columns: 1fr;
-                gap: 32px;
-            }
-            
-            .footer-section h3 {
-                font-size: 1.1rem;
-                margin-bottom: 16px;
-            }
-            
-            .footer-links a {
-                font-size: 0.85rem;
-            }
-            
-            .copyright {
-                font-size: 0.8rem;
-                padding-top: 20px;
-            }
-        }
-
-        @media (min-width: 769px) {
-            /* 桌面端隐藏移动导航 */
-            #mobile-nav {
-                display: none !important;
-            }
-        }
-
-        @media (max-width: 480px) {
-            /* 超小屏幕优化 */
-            .hero h2 {
-                font-size: 2rem;
-            }
-            
-            .hero p {
-                font-size: 0.95rem;
-            }
-            
-            .rules-nav a {
-                padding: 8px 10px;
-                font-size: 0.75rem;
-            }
-            
-            .rule-category {
-                padding: 18px;
-            }
-            
-            .category-title h2 {
-                font-size: 1.3rem;
-            }
-            
-            .rule-item {
-                padding: 14px;
-            }
-            
-            .rule-title {
-                font-size: 1rem;
-            }
-            
-            .important-notice {
-                padding: 20px;
-            }
-            
-            .container {
-                padding: 0 10px;
-            }
-            
-            .rules-nav {
-                margin-left: -10px;
-                margin-right: -10px;
-            }
-        }
-
-        /* 防止文字过小 */
-        @media (max-width: 350px) {
-            html {
-                font-size: 15px;
-            }
-            
-            .logo-text h1 {
-                font-size: 1.1rem;
-            }
-            
-            .hero h2 {
-                font-size: 1.6rem;
-            }
         }
 
         /* 动画 */
@@ -940,74 +579,142 @@
             }
         }
 
-        @keyframes slideInRight {
-            from {
-                opacity: 0;
-                transform: translateX(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
+        /* 页脚 */
+        footer {
+            background-color: var(--gray-900);
+            color: var(--gray-300);
+            padding: 64px 0 32px;
+            margin-top: 96px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 48px;
+            margin-bottom: 48px;
+        }
+
+        .footer-section h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 24px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: var(--gray-400);
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-light);
+            transform: translateX(4px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 32px;
+            border-top: 1px solid var(--gray-800);
+            color: var(--gray-500);
+            font-size: 0.875rem;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 1024px) {
+            .hero h2 {
+                font-size: 2.5rem;
             }
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
+        @media (max-width: 768px) {
+            .header-container {
+                height: 64px;
             }
-            to {
-                opacity: 1;
+            
+            .mobile-menu-toggle {
+                display: block;
+            }
+            
+            #desktop-nav {
+                display: none;
+            }
+            
+            .hero {
+                padding: 64px 0 48px;
+            }
+            
+            .hero h2 {
+                font-size: 2.25rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .category-list {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .category-btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+            
+            .category-title h3 {
+                font-size: 1.75rem;
             }
         }
 
-        @keyframes highlightPulse {
-            0% {
-                box-shadow: var(--shadow);
-            }
-            50% {
-                box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
-            }
-            100% {
-                box-shadow: var(--shadow-lg);
+        @media (min-width: 769px) {
+            #mobile-nav {
+                display: none !important;
             }
         }
 
-        @keyframes pulse {
-            0%, 100% {
-                box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.4);
+        @media (max-width: 480px) {
+            .hero h2 {
+                font-size: 2rem;
             }
-            50% {
-                box-shadow: 0 0 0 10px rgba(245, 158, 11, 0);
+            
+            .category-title h3 {
+                font-size: 1.5rem;
             }
-        }
-
-        @keyframes bounce {
-            0%, 100% {
-                transform: translateY(0);
+            
+            .container {
+                padding: 0 16px;
             }
-            50% {
-                transform: translateY(-3px);
+            
+            .rule-item {
+                padding: 16px;
             }
-        }
-
-        /* 滚动条样式优化 */
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--gray-100);
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--gray-300);
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--gray-400);
+            
+            .rule-item-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+            
+            .rule-title {
+                font-size: 1rem;
+            }
+            
+            .rule-severity {
+                align-self: flex-start;
+            }
         }
     </style>
 </head>
@@ -1059,40 +766,46 @@
     </div>
 
     <!-- 主内容区域 -->
-    <main class="container">
+    <main>
         <!-- 英雄区域 -->
         <section class="hero">
-            <div class="hero-content">
-                <h2>玩家守则</h2>
-                <p>为了维护 DreamWorld 生存服务器的良好游戏环境，请所有玩家仔细阅读并遵守以下规则。违规行为将受到相应处罚。</p>
+            <div class="container">
+                <div class="hero-content">
+                    <h2>玩家守则</h2>
+                    <p>为了维护 DreamWorld 生存服务器的良好游戏环境，请所有玩家仔细阅读并遵守以下规则。违规行为将受到相应处罚。</p>
+                </div>
+                
+                <!-- 规则分类导航 -->
+                <div class="category-nav">
+                    <div class="category-list">
+                        <a href="#basic-rules" class="category-btn active">
+                            <i class="fas fa-user-check"></i> 基本准则
+                        </a>
+                        <a href="#gameplay-rules" class="category-btn">
+                            <i class="fas fa-gamepad"></i> 游戏规则
+                        </a>
+                        <a href="#building-rules" class="category-btn">
+                            <i class="fas fa-cube"></i> 建筑规则
+                        </a>
+                        <a href="#community-rules" class="category-btn">
+                            <i class="fas fa-users"></i> 社区规则
+                        </a>
+                        <a href="#trade-rules" class="category-btn">
+                            <i class="fas fa-coins"></i> 交易规则
+                        </a>
+                    </div>
+                </div>
             </div>
         </section>
         
-        <!-- 规则分类导航 -->
-        <div class="rules-nav">
-            <ul>
-                <li><a href="#basic-rules"><i class="fas fa-user-check"></i> 基本准则</a></li>
-                <li><a href="#gameplay-rules"><i class="fas fa-gamepad"></i> 游戏规则</a></li>
-                <li><a href="#building-rules"><i class="fas fa-cube"></i> 建筑规则</a></li>
-                <li><a href="#community-rules"><i class="fas fa-users"></i> 社区规则</a></li>
-                <li><a href="#trade-rules"><i class="fas fa-coins"></i> 交易规则</a></li>
-            </ul>
-        </div>
-        
-        <!-- 规则内容 -->
-        <div class="rules-container">
-            <!-- 基本行为准则 -->
-            <section id="basic-rules" class="rule-category">
-                <div class="category-header">
-                    <div class="category-icon">
-                        <i class="fas fa-user-check"></i>
-                    </div>
-                    <div class="category-title">
-                        <h2>基本行为准则</h2>
-                        <p>所有玩家必须遵守的基本规则</p>
-                    </div>
-                </div>
-                
+        <!-- 基本行为准则 -->
+        <section class="rules-section container" id="basic-rules">
+            <div class="category-title">
+                <h3><i class="fas fa-user-check"></i> 基本行为准则</h3>
+                <p>所有玩家必须遵守的基本规则</p>
+            </div>
+            
+            <div class="rules-container">
                 <div class="rules-list">
                     <div class="rule-item">
                         <div class="rule-item-header">
@@ -1159,20 +872,17 @@
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
+        
+        <!-- 游戏玩法规则 -->
+        <section class="rules-section container" id="gameplay-rules" style="display: none;">
+            <div class="category-title">
+                <h3><i class="fas fa-gamepad"></i> 游戏玩法规则</h3>
+                <p>关于游戏玩法的具体规则</p>
+            </div>
             
-            <!-- 游戏玩法规则 -->
-            <section id="gameplay-rules" class="rule-category">
-                <div class="category-header">
-                    <div class="category-icon">
-                        <i class="fas fa-gamepad"></i>
-                    </div>
-                    <div class="category-title">
-                        <h2>游戏玩法规则</h2>
-                        <p>关于游戏玩法的具体规则</p>
-                    </div>
-                </div>
-                
+            <div class="rules-container">
                 <div class="rules-list">
                     <div class="rule-item danger">
                         <div class="rule-item-header">
@@ -1237,7 +947,9 @@
                                 <li>仅允许在主世界进行必要的建筑挖掘（需符合建筑规则）</li>
                                 <li>资源世界提供充足的矿产资源和安全的挖矿环境</li>
                             </ul>
-                            <p><strong>如何前往资源世界：</strong> 使用指令 <code style="font-family: 'JetBrains Mono', monospace; background: var(--gray-200); padding: 2px 6px; border-radius: 4px;">/warp ziyuan</code> 或前往主城寻找资源世界传送门。详细指引请查看<a href="https://help.dreamworld.eu.org" style="color: var(--primary); text-decoration: underline;">帮助与指令页面</a>。</p>
+                            <div class="mining-note">
+                                <strong>如何前往资源世界：</strong> 使用指令 <code style="font-family: 'JetBrains Mono', monospace; background: var(--gray-200); padding: 2px 6px; border-radius: 4px;">/warp ziyuan</code> 或前往主城寻找资源世界传送门。详细指引请查看<a href="https://help.dreamworld.eu.org">帮助与指令页面</a>。
+                            </div>
                         </div>
                         <div class="rule-penalty">
                             <strong>处罚:</strong> 首次违规警告并回滚挖矿行为，多次违规处以临时封禁3-7天，严重违规永久封禁。
@@ -1266,20 +978,17 @@
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
+        
+        <!-- 建筑与领地规则 -->
+        <section class="rules-section container" id="building-rules" style="display: none;">
+            <div class="category-title">
+                <h3><i class="fas fa-cube"></i> 建筑与领地规则</h3>
+                <p>关于建筑和领地使用的规则</p>
+            </div>
             
-            <!-- 建筑与领地规则 -->
-            <section id="building-rules" class="rule-category">
-                <div class="category-header">
-                    <div class="category-icon">
-                        <i class="fas fa-cube"></i>
-                    </div>
-                    <div class="category-title">
-                        <h2>建筑与领地规则</h2>
-                        <p>关于建筑和领地使用的规则</p>
-                    </div>
-                </div>
-                
+            <div class="rules-container">
                 <div class="rules-list">
                     <div class="rule-item">
                         <div class="rule-item-header">
@@ -1349,20 +1058,17 @@
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
+        
+        <!-- 社区互动规则 -->
+        <section class="rules-section container" id="community-rules" style="display: none;">
+            <div class="category-title">
+                <h3><i class="fas fa-users"></i> 社区互动规则</h3>
+                <p>玩家间互动与社区活动规则</p>
+            </div>
             
-            <!-- 社区互动规则 -->
-            <section id="community-rules" class="rule-category">
-                <div class="category-header">
-                    <div class="category-icon">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <div class="category-title">
-                        <h2>社区互动规则</h2>
-                        <p>玩家间互动与社区活动规则</p>
-                    </div>
-                </div>
-                
+            <div class="rules-container">
                 <div class="rules-list">
                     <div class="rule-item">
                         <div class="rule-item-header">
@@ -1410,20 +1116,17 @@
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
+        
+        <!-- 交易与经济规则 -->
+        <section class="rules-section container" id="trade-rules" style="display: none;">
+            <div class="category-title">
+                <h3><i class="fas fa-coins"></i> 交易与经济规则</h3>
+                <p>关于玩家间交易与经济系统的规则</p>
+            </div>
             
-            <!-- 交易与经济规则 -->
-            <section id="trade-rules" class="rule-category">
-                <div class="category-header">
-                    <div class="category-icon">
-                        <i class="fas fa-coins"></i>
-                    </div>
-                    <div class="category-title">
-                        <h2>交易与经济规则</h2>
-                        <p>关于玩家间交易与经济系统的规则</p>
-                    </div>
-                </div>
-                
+            <div class="rules-container">
                 <div class="rules-list">
                     <div class="rule-item danger">
                         <div class="rule-item-header">
@@ -1494,18 +1197,18 @@
                         </div>
                     </div>
                 </div>
-            </section>
-            
-            <!-- 重要提醒 -->
-            <div class="important-notice">
-                <div class="important-notice-content">
-                    <h3><i class="fas fa-exclamation-triangle"></i> 重要提醒</h3>
-                    <p><strong>最终解释权:</strong> 服务器管理员对规则拥有最终解释权，并有权根据实际情况对规则进行修改或补充。</p>
-                    <p><strong>规则更新:</strong> 本守则可能不定期更新，请玩家定期查阅最新版本。规则更新后，旧版本自动失效。</p>
-                    <p><strong>处罚申诉:</strong> 如对处罚有异议，可在封禁后7天内通过邮箱 mcworld@dreamworld.eu.org 申诉，需提供充分证据。</p>
-                    <p><strong>漏洞报告:</strong> 发现游戏漏洞或安全问题，请立即向管理员报告。主动报告漏洞的玩家可能获得奖励，利用漏洞将受到严厉处罚。</p>
-                    <p><strong>挖矿规则重要提示:</strong> 请所有玩家遵守"禁止在主世界挖矿"的新规，前往资源世界进行挖矿活动。详情请查看帮助页面。</p>
-                </div>
+            </div>
+        </section>
+        
+        <!-- 特别提醒区域 -->
+        <div class="container">
+            <div class="important-note">
+                <h4><i class="fas fa-bullhorn"></i> 重要提醒</h4>
+                <p><strong>最终解释权:</strong> 服务器管理员对规则拥有最终解释权，并有权根据实际情况对规则进行修改或补充。</p>
+                <p><strong>规则更新:</strong> 本守则可能不定期更新，请玩家定期查阅最新版本。规则更新后，旧版本自动失效。</p>
+                <p><strong>处罚申诉:</strong> 如对处罚有异议，可在封禁后7天内通过邮箱 mcworld@dreamworld.eu.org 申诉，需提供充分证据。</p>
+                <p><strong>漏洞报告:</strong> 发现游戏漏洞或安全问题，请立即向管理员报告。主动报告漏洞的玩家可能获得奖励，利用漏洞将受到严厉处罚。</p>
+                <p><strong>挖矿规则重要提示:</strong> 请所有玩家遵守"禁止在主世界挖矿"的新规，前往资源世界进行挖矿活动。详情请查看帮助页面。</p>
             </div>
         </div>
     </main>
@@ -1524,7 +1227,7 @@
                     <h3>快速链接</h3>
                     <ul class="footer-links">
                         <li><a href="https://dreamworld.eu.org"><i class="fas fa-chevron-right"></i> 主页</a></li>
-                        <li><a href="https://rules.dreamworld.eu.org"><i class="fas fa-chevron-right"></i> 玩家守则</a></li>
+                        <li><a href="https://rules.dreamworld.eu.org" class="active"><i class="fas fa-chevron-right"></i> 玩家守则</a></li>
                         <li><a href="https://help.dreamworld.eu.org"><i class="fas fa-chevron-right"></i> 帮助与指令</a></li>
                         <li><a href="https://banlist.dreamworld.eu.org"><i class="fas fa-chevron-right"></i> 封神榜</a></li>
                     </ul>
@@ -1533,10 +1236,9 @@
                 <div class="footer-section">
                     <h3>连接信息</h3>
                     <ul class="footer-links">
-                        <li><a><i class="fas fa-server"></i> <span style="font-family: 'JetBrains Mono', monospace; color: var(--gray-400);">play.simpfun.cn:30808</span></a></li>
+                        <li><a><i class="fas fa-server"></i> <span style="font-family: 'JetBrains Mono', monospace;">play.simpfun.cn:30808</span></a></li>
                         <li><a><i class="fas fa-code-branch"></i> JAVA 1.21.1</a></li>
                         <li><a><i class="fas fa-plug"></i> JAVA版 & 基岩版</a></li>
-                        <li><a><i class="fas fa-exclamation-circle"></i> 背包不互通</a></li>
                     </ul>
                 </div>
             </div>
@@ -1544,9 +1246,102 @@
             <div class="copyright">
                 <p>&copy; 2025-2026 DreamWorld Minecraft服务器 版权所有</p>
                 <p style="margin-top: 8px;">本服务器与Mojang Studios没有官方关联。Minecraft是Mojang Studios的商标。</p>
-                <p style="margin-top: 8px;">最后更新：2025年1月20日</p>
+                <p style="margin-top: 8px;">最后更新：2026年1月2日</p>
             </div>
         </div>
     </footer>
+
+    <script>
+        // 页面加载时的初始设置
+        document.addEventListener('DOMContentLoaded', function() {
+            // 显示基本规则部分，隐藏其他部分
+            document.getElementById('basic-rules').style.display = 'block';
+            
+            // 当前页面高亮
+            const navLinks = document.querySelectorAll('nav a');
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === 'https://rules.dreamworld.eu.org') {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+            
+            // 页脚链接高亮
+            const footerLinks = document.querySelectorAll('.footer-links a');
+            footerLinks.forEach(link => {
+                if (link.getAttribute('href') === 'https://rules.dreamworld.eu.org') {
+                    link.classList.add('active');
+                }
+            });
+            
+            // 规则类别切换功能
+            const categoryButtons = document.querySelectorAll('.category-btn');
+            const ruleSections = document.querySelectorAll('.rules-section');
+            
+            categoryButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // 移除所有按钮的active类
+                    categoryButtons.forEach(btn => btn.classList.remove('active'));
+                    // 添加当前按钮的active类
+                    this.classList.add('active');
+                    
+                    // 获取目标类别
+                    const targetId = this.getAttribute('href').substring(1);
+                    
+                    // 隐藏所有规则区域
+                    ruleSections.forEach(section => {
+                        section.style.display = 'none';
+                    });
+                    
+                    // 显示目标规则区域
+                    const targetSection = document.getElementById(targetId);
+                    if (targetSection) {
+                        targetSection.style.display = 'block';
+                        
+                        // 平滑滚动到目标区域
+                        targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            });
+            
+            // 点击导航链接时关闭移动菜单
+            document.querySelectorAll('#mobile-nav a').forEach(link => {
+                link.addEventListener('click', function() {
+                    // 关闭移动菜单
+                    window.location.hash = '';
+                });
+            });
+        });
+        
+        // 处理URL中的锚点
+        window.addEventListener('hashchange', function() {
+            const hash = window.location.hash.substring(1);
+            
+            if (hash && ['basic-rules', 'gameplay-rules', 'building-rules', 'community-rules', 'trade-rules'].includes(hash)) {
+                // 移除所有按钮的active类
+                document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
+                
+                // 添加当前按钮的active类
+                const activeBtn = document.querySelector(`.category-btn[href="#${hash}"]`);
+                if (activeBtn) {
+                    activeBtn.classList.add('active');
+                }
+                
+                // 隐藏所有规则区域
+                document.querySelectorAll('.rules-section').forEach(section => {
+                    section.style.display = 'none';
+                });
+                
+                // 显示目标规则区域
+                const targetSection = document.getElementById(hash);
+                if (targetSection) {
+                    targetSection.style.display = 'block';
+                }
+            }
+        });
+    </script>
 </body>
 </html>
