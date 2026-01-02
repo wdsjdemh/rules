@@ -109,7 +109,7 @@
             gap: 10px;
             text-decoration: none;
             color: var(--gray-900);
-            min-width: 0; /* 防止logo溢出 */
+            min-width: 0;
         }
 
         .logo-icon {
@@ -192,10 +192,78 @@
             height: 44px;
             align-items: center;
             justify-content: center;
+            text-decoration: none;
         }
 
         .mobile-menu-toggle:hover, .mobile-menu-toggle:active {
             background-color: var(--gray-100);
+        }
+
+        /* 移动端导航菜单 */
+        #mobile-nav {
+            display: none;
+            background-color: var(--white);
+            border-top: 1px solid var(--gray-200);
+            padding: 16px;
+            position: absolute;
+            top: 60px;
+            left: 0;
+            right: 0;
+            box-shadow: var(--shadow-md);
+            z-index: 99;
+        }
+
+        #mobile-nav:target {
+            display: block;
+        }
+
+        #mobile-nav ul {
+            flex-direction: column;
+            gap: 8px;
+            list-style: none;
+        }
+
+        #mobile-nav li {
+            width: 100%;
+        }
+
+        #mobile-nav a {
+            justify-content: flex-start;
+            padding: 14px 16px;
+            width: 100%;
+            border-radius: var(--radius-sm);
+            font-size: 1rem;
+            color: var(--gray-700);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: var(--transition);
+        }
+
+        #mobile-nav a:hover {
+            background-color: var(--gray-100);
+            color: var(--primary);
+        }
+
+        #mobile-nav .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--gray-600);
+            text-decoration: none;
+            border-radius: var(--radius-xs);
+        }
+
+        #mobile-nav .close-btn:hover {
+            background-color: var(--gray-100);
+            color: var(--danger);
         }
 
         /* 主要内容样式 - 移动端优化 */
@@ -309,6 +377,16 @@
         .rules-nav a.active {
             background-color: var(--primary-light);
             color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        /* 高亮当前部分 */
+        .rule-category:target .category-header {
+            border-bottom-color: var(--primary);
+        }
+
+        .rule-category:target {
+            box-shadow: var(--shadow-lg);
             border-color: var(--primary);
         }
 
@@ -599,46 +677,9 @@
                 display: flex;
             }
             
-            /* 移动端导航菜单 */
-            nav {
-                position: fixed;
-                top: 56px;
-                left: 0;
-                width: 100%;
-                background-color: var(--white);
-                box-shadow: var(--shadow-md);
-                padding: 16px;
-                transform: translateY(-100%);
-                opacity: 0;
-                transition: var(--transition);
-                z-index: 99;
-                max-height: calc(100vh - 56px);
-                overflow-y: auto;
-                -webkit-overflow-scrolling: touch;
-                border-top: 1px solid var(--gray-200);
-            }
-            
-            nav.active {
-                transform: translateY(0);
-                opacity: 1;
-            }
-            
-            nav ul {
-                flex-direction: column;
-                gap: 8px;
-                width: 100%;
-            }
-            
-            nav li {
-                width: 100%;
-            }
-            
-            nav a {
-                justify-content: flex-start;
-                padding: 14px 16px;
-                width: 100%;
-                border-radius: var(--radius-sm);
-                font-size: 1rem;
+            /* 隐藏桌面导航，显示移动导航 */
+            #desktop-nav {
+                display: none;
             }
             
             /* 页面标题优化 */
@@ -774,6 +815,13 @@
             }
         }
 
+        @media (min-width: 769px) {
+            /* 桌面端隐藏移动导航 */
+            #mobile-nav {
+                display: none !important;
+            }
+        }
+
         @media (max-width: 480px) {
             /* 超小屏幕优化 */
             .page-header h1 {
@@ -881,11 +929,12 @@
                 </div>
             </a>
             
-            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="打开菜单">
+            <a href="#mobile-nav" class="mobile-menu-toggle" aria-label="打开菜单">
                 <i class="fas fa-bars"></i>
-            </button>
+            </a>
             
-            <nav id="mainNav">
+            <!-- 桌面导航 -->
+            <nav id="desktop-nav">
                 <ul>
                     <li><a href="https://dreamworld.eu.org"><i class="fas fa-home"></i> 主页</a></li>
                     <li><a href="https://rules.dreamworld.eu.org" class="active"><i class="fas fa-scroll"></i> 玩家守则</a></li>
@@ -897,6 +946,21 @@
             </nav>
         </div>
     </header>
+
+    <!-- 移动端导航菜单 -->
+    <div id="mobile-nav">
+        <a href="#" class="close-btn" aria-label="关闭菜单">
+            <i class="fas fa-times"></i>
+        </a>
+        <ul>
+            <li><a href="https://dreamworld.eu.org"><i class="fas fa-home"></i> 主页</a></li>
+            <li><a href="https://rules.dreamworld.eu.org" class="active"><i class="fas fa-scroll"></i> 玩家守则</a></li>
+            <li><a href="https://help.dreamworld.eu.org"><i class="fas fa-question-circle"></i> 帮助与指令</a></li>
+            <li><a href="https://banlist.dreamworld.eu.org"><i class="fas fa-gavel"></i> 封神榜</a></li>
+            <li><a href="https://public.dreamworld.eu.org"><i class="fas fa-city"></i> 公共设施</a></li>
+            <li><a href="https://download.dreamworld.eu.org"><i class="fas fa-download"></i> 下载中心</a></li>
+        </ul>
+    </div>
 
     <!-- 主内容区域 -->
     <main class="container">
@@ -1361,165 +1425,5 @@
             </div>
         </div>
     </footer>
-
-    <script>
-        // 移动端菜单切换
-        document.getElementById('mobileMenuToggle').addEventListener('click', function() {
-            const nav = document.getElementById('mainNav');
-            const isActive = nav.classList.toggle('active');
-            
-            // 切换图标
-            const icon = this.querySelector('i');
-            if (isActive) {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times');
-                this.setAttribute('aria-label', '关闭菜单');
-            } else {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-                this.setAttribute('aria-label', '打开菜单');
-            }
-            
-            // 防止滚动
-            document.body.style.overflow = isActive ? 'hidden' : '';
-        });
-        
-        // 点击导航链接时关闭移动菜单
-        document.querySelectorAll('nav a').forEach(link => {
-            link.addEventListener('click', function() {
-                const nav = document.getElementById('mainNav');
-                const toggleBtn = document.getElementById('mobileMenuToggle');
-                
-                if (nav.classList.contains('active')) {
-                    nav.classList.remove('active');
-                    toggleBtn.querySelector('i').classList.remove('fa-times');
-                    toggleBtn.querySelector('i').classList.add('fa-bars');
-                    toggleBtn.setAttribute('aria-label', '打开菜单');
-                    document.body.style.overflow = '';
-                }
-            });
-        });
-        
-        // 规则分类导航滚动和点击处理
-        document.addEventListener('DOMContentLoaded', function() {
-            const navLinks = document.querySelectorAll('.rules-nav a');
-            const sections = document.querySelectorAll('.rule-category');
-            
-            // 移除所有active类
-            function removeActiveClasses() {
-                navLinks.forEach(link => link.classList.remove('active'));
-            }
-            
-            // 监听滚动，高亮当前可见部分
-            function highlightVisibleSection() {
-                let currentSection = '';
-                const scrollPosition = window.scrollY + 120; // 偏移量，使导航更灵敏
-                
-                sections.forEach(section => {
-                    const sectionTop = section.offsetTop;
-                    const sectionHeight = section.clientHeight;
-                    
-                    if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-                        currentSection = section.getAttribute('id');
-                    }
-                });
-                
-                // 更新导航链接
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href').substring(1) === currentSection) {
-                        link.classList.add('active');
-                    }
-                });
-                
-                // 如果没有高亮部分，默认高亮第一个
-                if (!currentSection && navLinks.length > 0) {
-                    navLinks[0].classList.add('active');
-                }
-            }
-            
-            // 点击导航链接平滑滚动
-            navLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href').substring(1);
-                    const targetSection = document.getElementById(targetId);
-                    
-                    if (targetSection) {
-                        // 更新active状态
-                        removeActiveClasses();
-                        this.classList.add('active');
-                        
-                        // 平滑滚动到目标
-                        const headerHeight = document.querySelector('header').offsetHeight;
-                        const targetPosition = targetSection.offsetTop - headerHeight - 20;
-                        
-                        window.scrollTo({
-                            top: targetPosition,
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            });
-            
-            // 监听滚动事件
-            window.addEventListener('scroll', highlightVisibleSection, { passive: true });
-            
-            // 初始高亮
-            setTimeout(highlightVisibleSection, 100);
-            
-            // 当前页面高亮
-            const mainNavLinks = document.querySelectorAll('nav a');
-            const currentPage = window.location.href;
-            mainNavLinks.forEach(link => {
-                if (link.href === currentPage) {
-                    link.classList.add('active');
-                } else {
-                    link.classList.remove('active');
-                }
-            });
-            
-            // 移动端触摸优化
-            let touchStartY = 0;
-            
-            document.addEventListener('touchstart', function(e) {
-                touchStartY = e.touches[0].clientY;
-            }, { passive: true });
-            
-            // 防止在滚动时意外点击
-            document.addEventListener('touchmove', function(e) {
-                // 添加一些触摸反馈
-                if (Math.abs(e.touches[0].clientY - touchStartY) > 10) {
-                    // 用户正在滚动，可以添加视觉反馈
-                }
-            }, { passive: true });
-            
-            // 移动端加载优化
-            if ('loading' in HTMLImageElement.prototype) {
-                // 浏览器支持原生懒加载
-                const images = document.querySelectorAll('img');
-                images.forEach(img => {
-                    img.loading = 'lazy';
-                });
-            }
-        });
-        
-        // 修复移动端视口缩放问题
-        document.addEventListener('touchmove', function(e) {
-            if (e.scale !== 1) {
-                e.preventDefault();
-            }
-        }, { passive: false });
-        
-        // 防止双击缩放
-        let lastTouchEnd = 0;
-        document.addEventListener('touchend', function(e) {
-            const now = Date.now();
-            if (now - lastTouchEnd <= 300) {
-                e.preventDefault();
-            }
-            lastTouchEnd = now;
-        }, false);
-    </script>
 </body>
 </html>
