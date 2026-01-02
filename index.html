@@ -279,16 +279,33 @@
             }
         }
 
-        /* 页面标题 */
-        .page-header {
-            text-align: center;
-            margin-bottom: 40px;
+        /* 英雄区域 */
+        .hero {
+            padding: 60px 0 40px;
             position: relative;
-            padding: 0 8px;
+            overflow: hidden;
         }
 
-        .page-header h1 {
-            font-size: 2.5rem;
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--secondary-light) 100%);
+            opacity: 0.15;
+            z-index: -1;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h2 {
+            font-size: 3rem;
             font-weight: 800;
             line-height: 1.1;
             margin-bottom: 16px;
@@ -296,41 +313,28 @@
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            word-wrap: break-word;
-            overflow-wrap: break-word;
+            animation: fadeInUp 0.8s ease-out;
         }
 
-        .page-header p {
-            font-size: 1.1rem;
+        .hero p {
+            font-size: 1.125rem;
             color: var(--gray-600);
-            max-width: 800px;
-            margin: 0 auto;
-            line-height: 1.6;
-        }
-
-        .page-header::after {
-            content: '';
-            position: absolute;
-            bottom: -16px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            border-radius: 2px;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
         }
 
         /* 规则分类导航 - 移动端优化 */
         .rules-nav {
-            position: sticky;
-            top: 68px;
             background-color: var(--white);
             border-radius: var(--radius);
             padding: 12px;
             margin-bottom: 24px;
             box-shadow: var(--shadow);
-            z-index: 50;
             border: 1px solid var(--gray-200);
+            animation: fadeInUp 0.8s ease-out 0.4s both;
         }
 
         .rules-nav ul {
@@ -372,22 +376,18 @@
         .rules-nav a:hover {
             background-color: var(--gray-100);
             color: var(--primary);
-        }
-
-        .rules-nav a.active {
-            background-color: var(--primary-light);
-            color: var(--primary);
-            border-color: var(--primary);
+            transform: translateY(-2px);
         }
 
         /* 高亮当前部分 */
-        .rule-category:target .category-header {
-            border-bottom-color: var(--primary);
-        }
-
         .rule-category:target {
             box-shadow: var(--shadow-lg);
             border-color: var(--primary);
+            animation: highlightPulse 2s ease-in-out;
+        }
+
+        .rule-category:target .category-header {
+            border-bottom-color: var(--primary);
         }
 
         /* 规则内容区域 */
@@ -404,11 +404,21 @@
             box-shadow: var(--shadow);
             border: 1px solid var(--gray-200);
             transition: var(--transition);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease-out forwards;
         }
+
+        .rule-category:nth-child(1) { animation-delay: 0.1s; }
+        .rule-category:nth-child(2) { animation-delay: 0.2s; }
+        .rule-category:nth-child(3) { animation-delay: 0.3s; }
+        .rule-category:nth-child(4) { animation-delay: 0.4s; }
+        .rule-category:nth-child(5) { animation-delay: 0.5s; }
 
         .rule-category:hover {
             box-shadow: var(--shadow-md);
             border-color: var(--primary-light);
+            transform: translateY(-5px);
         }
 
         .category-header {
@@ -460,10 +470,19 @@
             background-color: var(--gray-50);
             border-left: 4px solid var(--primary);
             transition: var(--transition);
+            opacity: 0;
+            transform: translateX(-10px);
+            animation: slideInRight 0.5s ease-out forwards;
         }
+
+        .rule-item:nth-child(1) { animation-delay: 0.3s; }
+        .rule-item:nth-child(2) { animation-delay: 0.4s; }
+        .rule-item:nth-child(3) { animation-delay: 0.5s; }
+        .rule-item:nth-child(4) { animation-delay: 0.6s; }
 
         .rule-item:hover {
             background-color: var(--gray-100);
+            transform: translateX(5px);
         }
 
         .rule-item.warning {
@@ -544,11 +563,39 @@
             border-radius: var(--radius-sm);
             border: 1px solid var(--gray-200);
             font-size: 0.9rem;
+            animation: fadeIn 0.5s ease-out 0.3s both;
         }
 
         .rule-penalty strong {
             color: var(--danger);
             font-weight: 600;
+        }
+
+        /* 特别强调的挖矿规则 */
+        .mining-rule {
+            position: relative;
+            background: linear-gradient(135deg, var(--warning-light) 0%, var(--primary-light) 100%);
+            border-left: 4px solid var(--warning);
+            animation: pulse 2s infinite;
+        }
+
+        .mining-rule::before {
+            content: '新规则';
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: linear-gradient(135deg, var(--warning), var(--danger));
+            color: white;
+            font-size: 0.6rem;
+            font-weight: 600;
+            padding: 4px 8px;
+            border-radius: 10px;
+            z-index: 1;
+        }
+
+        .mining-rule .rule-title i {
+            color: var(--warning);
+            animation: bounce 1s infinite;
         }
 
         /* 重要提醒 */
@@ -560,6 +607,7 @@
             border: 1px solid var(--primary);
             position: relative;
             overflow: hidden;
+            animation: fadeInUp 0.8s ease-out 0.8s both;
         }
 
         .important-notice::before {
@@ -655,6 +703,7 @@
 
         .footer-links a:hover {
             color: var(--primary-light);
+            transform: translateX(4px);
         }
 
         .copyright {
@@ -682,26 +731,23 @@
                 display: none;
             }
             
-            /* 页面标题优化 */
-            .page-header h1 {
-                font-size: 2rem;
+            /* 英雄区域优化 */
+            .hero h2 {
+                font-size: 2.25rem;
             }
             
-            .page-header p {
+            .hero p {
                 font-size: 1rem;
-                padding: 0 4px;
             }
             
             /* 规则导航优化 */
             .rules-nav {
-                top: 64px;
                 padding: 10px;
                 margin-left: -12px;
                 margin-right: -12px;
                 border-radius: 0;
                 border-left: none;
                 border-right: none;
-                position: sticky;
             }
             
             .rules-nav ul {
@@ -824,11 +870,11 @@
 
         @media (max-width: 480px) {
             /* 超小屏幕优化 */
-            .page-header h1 {
-                font-size: 1.75rem;
+            .hero h2 {
+                font-size: 2rem;
             }
             
-            .page-header p {
+            .hero p {
                 font-size: 0.95rem;
             }
             
@@ -877,7 +923,7 @@
                 font-size: 1.1rem;
             }
             
-            .page-header h1 {
+            .hero h2 {
                 font-size: 1.6rem;
             }
         }
@@ -886,11 +932,61 @@
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(30px);
             }
             to {
                 opacity: 1;
                 transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes highlightPulse {
+            0% {
+                box-shadow: var(--shadow);
+            }
+            50% {
+                box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+            }
+            100% {
+                box-shadow: var(--shadow-lg);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.4);
+            }
+            50% {
+                box-shadow: 0 0 0 10px rgba(245, 158, 11, 0);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-3px);
             }
         }
 
@@ -964,16 +1060,18 @@
 
     <!-- 主内容区域 -->
     <main class="container">
-        <!-- 页面标题 -->
-        <div class="page-header">
-            <h1>玩家守则</h1>
-            <p>为了维护 DreamWorld 生存服务器的良好游戏环境，请所有玩家仔细阅读并遵守以下规则。违规行为将受到相应处罚。</p>
-        </div>
+        <!-- 英雄区域 -->
+        <section class="hero">
+            <div class="hero-content">
+                <h2>玩家守则</h2>
+                <p>为了维护 DreamWorld 生存服务器的良好游戏环境，请所有玩家仔细阅读并遵守以下规则。违规行为将受到相应处罚。</p>
+            </div>
+        </section>
         
         <!-- 规则分类导航 -->
         <div class="rules-nav">
             <ul>
-                <li><a href="#basic-rules" class="active"><i class="fas fa-user-check"></i> 基本准则</a></li>
+                <li><a href="#basic-rules"><i class="fas fa-user-check"></i> 基本准则</a></li>
                 <li><a href="#gameplay-rules"><i class="fas fa-gamepad"></i> 游戏规则</a></li>
                 <li><a href="#building-rules"><i class="fas fa-cube"></i> 建筑规则</a></li>
                 <li><a href="#community-rules"><i class="fas fa-users"></i> 社区规则</a></li>
@@ -1119,6 +1217,30 @@
                         </div>
                         <div class="rule-penalty">
                             <strong>处罚:</strong> 根据情节轻重，处以警告、物品没收或临时封禁1-7天。
+                        </div>
+                    </div>
+                    
+                    <!-- 新增的挖矿规则 -->
+                    <div class="rule-item mining-rule">
+                        <div class="rule-item-header">
+                            <h3 class="rule-title">
+                                <i class="fas fa-mountain"></i>
+                                禁止在主世界挖矿
+                            </h3>
+                            <span class="rule-severity danger">非常严重</span>
+                        </div>
+                        <div class="rule-description">
+                            <p>为了保护主世界地形和环境，禁止在主世界进行任何形式的挖矿活动。所有挖矿活动必须在资源世界进行。</p>
+                            <ul>
+                                <li>禁止在主世界挖掘矿石（包括但不限于煤矿、铁矿、金矿、钻石矿等）</li>
+                                <li>禁止在主世界挖掘任何洞穴或地下结构</li>
+                                <li>仅允许在主世界进行必要的建筑挖掘（需符合建筑规则）</li>
+                                <li>资源世界提供充足的矿产资源和安全的挖矿环境</li>
+                            </ul>
+                            <p><strong>如何前往资源世界：</strong> 使用指令 <code style="font-family: 'JetBrains Mono', monospace; background: var(--gray-200); padding: 2px 6px; border-radius: 4px;">/warp ziyuan</code> 或前往主城寻找资源世界传送门。详细指引请查看<a href="https://help.dreamworld.eu.org" style="color: var(--primary); text-decoration: underline;">帮助与指令页面</a>。</p>
+                        </div>
+                        <div class="rule-penalty">
+                            <strong>处罚:</strong> 首次违规警告并回滚挖矿行为，多次违规处以临时封禁3-7天，严重违规永久封禁。
                         </div>
                     </div>
                     
@@ -1382,6 +1504,7 @@
                     <p><strong>规则更新:</strong> 本守则可能不定期更新，请玩家定期查阅最新版本。规则更新后，旧版本自动失效。</p>
                     <p><strong>处罚申诉:</strong> 如对处罚有异议，可在封禁后7天内通过邮箱 mcworld@dreamworld.eu.org 申诉，需提供充分证据。</p>
                     <p><strong>漏洞报告:</strong> 发现游戏漏洞或安全问题，请立即向管理员报告。主动报告漏洞的玩家可能获得奖励，利用漏洞将受到严厉处罚。</p>
+                    <p><strong>挖矿规则重要提示:</strong> 请所有玩家遵守"禁止在主世界挖矿"的新规，前往资源世界进行挖矿活动。详情请查看帮助页面。</p>
                 </div>
             </div>
         </div>
